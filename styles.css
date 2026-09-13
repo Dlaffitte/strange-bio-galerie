@@ -218,34 +218,6 @@ html, body {
   padding: 8px;
 }
 
-/* Badge de type d'élément */
-.card-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  z-index: 2;
-}
-
-.card:not(.card-text) .card-badge {
-  background: rgba(139, 92, 246, 0.85);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.card.card-text .card-badge {
-  background: rgba(14, 165, 233, 0.9);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
 .card-index {
   position: absolute;
   bottom: 12px;
@@ -281,14 +253,6 @@ html, body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.card-subtitle {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 0;
 }
 
 .card.card-text .card-title {
@@ -348,18 +312,6 @@ html, body {
   padding: 6px 14px;
   border-radius: var(--radius-btn);
   border: 1px solid var(--border-subtle);
-}
-
-.lightbox-tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 5px 12px;
-  border-radius: var(--radius-btn);
-  background: rgba(230, 190, 100, 0.15);
-  color: var(--accent);
-  border: 1px solid rgba(230, 190, 100, 0.3);
 }
 
 .lightbox-content {

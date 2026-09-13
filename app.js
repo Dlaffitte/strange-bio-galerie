@@ -10,7 +10,6 @@
   var lightboxImg = document.getElementById("lightbox-img");
   var lightboxTitle = document.getElementById("lightbox-title");
   var lightboxCounter = document.getElementById("lightbox-counter");
-  var lightboxTag = document.getElementById("lightbox-tag");
   var closeBtn = document.getElementById("lightbox-close");
   var prevBtn = document.getElementById("lightbox-prev");
   var nextBtn = document.getElementById("lightbox-next");
@@ -45,31 +44,21 @@
       img.loading = "lazy";
       img.draggable = false;
 
-      var badge = document.createElement("span");
-      badge.className = "card-badge";
-      badge.textContent = item.type === "text" ? "Texte" : "Œuvre";
-
       var indexBadge = document.createElement("span");
       indexBadge.className = "card-index";
       var displayNum = idx + 1;
       indexBadge.textContent = "#" + (displayNum < 10 ? "0" + displayNum : displayNum);
 
       media.appendChild(img);
-      media.appendChild(badge);
       media.appendChild(indexBadge);
 
       var info = document.createElement("div");
       info.className = "card-info";
 
-      var subtitle = document.createElement("div");
-      subtitle.className = "card-subtitle";
-      subtitle.textContent = item.type === "text" ? "Carton d'exposition" : "Illustration originale";
-
       var title = document.createElement("h2");
       title.className = "card-title";
       title.textContent = item.title;
 
-      info.appendChild(subtitle);
       info.appendChild(title);
 
       card.appendChild(media);
@@ -101,18 +90,6 @@
     lightboxTitle.textContent = item.title;
 
     lightboxCounter.textContent = (idx + 1) + " / " + items.length;
-    
-    if (item.type === "text") {
-      lightboxTag.textContent = "📜 Carton / Texte";
-      lightboxTag.style.color = "#38bdf8";
-      lightboxTag.style.borderColor = "rgba(14, 165, 233, 0.4)";
-      lightboxTag.style.background = "rgba(14, 165, 233, 0.12)";
-    } else {
-      lightboxTag.textContent = "🎨 Œuvre originale";
-      lightboxTag.style.color = "#c084fc";
-      lightboxTag.style.borderColor = "rgba(139, 92, 246, 0.4)";
-      lightboxTag.style.background = "rgba(139, 92, 246, 0.12)";
-    }
 
     lightbox.hidden = false;
     document.body.style.overflow = "hidden";
