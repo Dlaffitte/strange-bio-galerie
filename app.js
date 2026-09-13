@@ -71,7 +71,7 @@
       var frag = document.createDocumentFragment();
       items.forEach(function (item, index) {
         var card = document.createElement("div");
-        card.className = "card";
+        card.className = "card" + (item.type === "text" ? " card-text" : "");
 
         var img = document.createElement("img");
         img.src = item.thumb;

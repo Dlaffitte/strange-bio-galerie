@@ -83,6 +83,16 @@ img {
   background: #000;
 }
 
+.card-text img {
+  background: #fff;
+  object-fit: contain;
+}
+
+.card-text .card-title {
+  color: var(--accent);
+  font-style: italic;
+}
+
 .card .card-title {
   padding: 10px 12px 12px;
   font-size: 0.92rem;

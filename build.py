@@ -2,13 +2,15 @@
 """
 Génère le site vitrine "Strange Bio" à partir du dossier source d'œuvres.
 
-- Repère les images "œuvre" (fichiers > SIZE_THRESHOLD, les petits fichiers
-  sont des cartons de titre non affichés).
-- Redimensionne + applique un filigrane répété en diagonale, "gravé" dans les
-  pixels (pas juste en CSS) pour dissuader la copie.
-- Génère deux tailles : vignette (grille) et image "grande" (visionneuse),
-  toutes deux filigranées et volontairement en résolution/qualité réduites
-  (jamais la définition originale n'est servie).
+- Toutes les images du diaporama sont incluses : les œuvres (fichiers
+  > SIZE_THRESHOLD) ET les cartons de texte/intention (fichiers plus légers,
+  fond blanc + texte) qui accompagnent chaque œuvre dans la présentation
+  d'origine.
+- Les œuvres reçoivent un filigrane répété en diagonale, "gravé" dans les
+  pixels (pas juste en CSS) pour dissuader la copie. Les cartons de texte
+  ne sont pas filigranés (ce ne sont pas des visuels à protéger) mais
+  restent réduits en résolution comme le reste.
+- Génère deux tailles : vignette (grille) et image "grande" (visionneuse).
 - Écrit images/manifest.json consommé par index.html.
 
 Usage: python3 build.py
@@ -21,13 +23,18 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
+try:
+    import pytesseract  # OCR optionnel : utilisé pour titrer les cartons de texte
+except ImportError:
+    pytesseract = None
+
 SOURCE_DIR = Path(__file__).resolve().parent.parent / "Diaporama Expo"
 SITE_DIR = Path(__file__).resolve().parent
 THUMBS_DIR = SITE_DIR / "images" / "thumbs"
 FULL_DIR = SITE_DIR / "images" / "full"
 MANIFEST_PATH = SITE_DIR / "images" / "manifest.json"
 
-SIZE_THRESHOLD = 500_000  # octets : sépare cartons de titre (petits) des œuvres (gros)
+SIZE_THRESHOLD = 500_000  # octets : sépare cartons de texte (petits) des œuvres (gros)
 WATERMARK_TEXT = "STRANGE BIO \u2022 APERÇU \u2022 NE PAS COPIER"
 FULL_MAX_DIM = 1400
 THUMB_MAX_DIM = 520
@@ -109,7 +116,7 @@ def make_watermark_layer(size, text=WATERMARK_TEXT):
     return tile
 
 
-def process_image(src_path: Path, out_path: Path, max_dim: int):
+def process_image(src_path: Path, out_path: Path, max_dim: int, watermark: bool):
     img = Image.open(src_path)
     img = ImageOps.exif_transpose(img)
     img = img.convert("RGB")
@@ -117,23 +124,46 @@ def process_image(src_path: Path, out_path: Path, max_dim: int):
     scale = min(1.0, max_dim / max(w, h))
     if scale < 1.0:
         img = img.resize((max(1, int(w * scale)), max(1, int(h * scale))), Image.LANCZOS)
-    rgba = img.convert("RGBA")
-    watermark = make_watermark_layer(rgba.size)
-    combined = Image.alpha_composite(rgba, watermark).convert("RGB")
 
-    # ajoute une mention de copyright discrète en bas d'image, plus lisible
-    draw = ImageDraw.Draw(combined)
-    font = load_font(max(14, combined.size[0] // 45))
-    label = "\u00a9 Strange Bio — aperçu non contractuel"
-    tw = draw.textlength(label, font=font)
-    pad = 10
-    x = combined.size[0] - tw - pad * 2
-    y = combined.size[1] - font.size - pad * 2
-    draw.rectangle([x, y, combined.size[0], combined.size[1]], fill=(0, 0, 0, 160))
-    draw.text((x + pad, y + pad // 2), label, font=font, fill=(255, 255, 255, 230))
+    if watermark:
+        rgba = img.convert("RGBA")
+        wm = make_watermark_layer(rgba.size)
+        combined = Image.alpha_composite(rgba, wm).convert("RGB")
+
+        # ajoute une mention de copyright discrète en bas d'image, plus lisible
+        draw = ImageDraw.Draw(combined)
+        font = load_font(max(14, combined.size[0] // 45))
+        label = "\u00a9 Strange Bio — aperçu non contractuel"
+        tw = draw.textlength(label, font=font)
+        pad = 10
+        x = combined.size[0] - tw - pad * 2
+        y = combined.size[1] - font.size - pad * 2
+        draw.rectangle([x, y, combined.size[0], combined.size[1]], fill=(0, 0, 0, 160))
+        draw.text((x + pad, y + pad // 2), label, font=font, fill=(255, 255, 255, 230))
+    else:
+        combined = img
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     combined.save(out_path, "JPEG", quality=JPEG_QUALITY, optimize=True)
+
+
+def ocr_title(src_path: Path, fallback: str) -> str:
+    """Essaie d'extraire le texte d'un carton de présentation via OCR.
+    Retombe sur `fallback` si l'OCR n'est pas disponible ou échoue."""
+    if pytesseract is None:
+        return fallback
+    try:
+        img = Image.open(src_path)
+        img = ImageOps.exif_transpose(img).convert("L")
+        text = pytesseract.image_to_string(img, lang="fra")
+        lines = [l.strip() for l in text.splitlines() if l.strip()]
+        if not lines:
+            return fallback
+        title = lines[0]
+        title = re.sub(r"\s+", " ", title).strip(" .")
+        return title[:80] if title else fallback
+    except Exception:
+        return fallback
 
 
 def main():
@@ -146,37 +176,56 @@ def main():
     entries = []
     seen_slugs = {}
     files = sorted(SOURCE_DIR.glob("*.jpg")) + sorted(SOURCE_DIR.glob("*.jpeg"))
-    for f in files:
-        if f.stat().st_size < SIZE_THRESHOLD:
-            continue  # carton de titre, pas une œuvre
+
+    def order_key(path: Path):
+        """Ordre naturel du diaporama : groupe numérique (1, 2, 3…, pas
+        alphabétique) puis sous-rang (le carton de texte "N.1" avant les
+        œuvres "N.2"/"N.3", les fichiers "N.jpg" sans suffixe en dernier)."""
+        m = re.match(r"^(\d+)(?:\.(\d+))?", path.stem)
+        group_num = int(m.group(1)) if m else 999
+        subnum = int(m.group(2)) if (m and m.group(2)) else 100
+        return (group_num, subnum, path.name)
+
+    files.sort(key=order_key)
+
+    for position, f in enumerate(files):
         stem = f.stem
         m = re.match(r"^(\d+)", stem)
-        order_num = int(m.group(1)) if m else 999
-        title = clean_title(stem)
+        group_num = int(m.group(1)) if m else 999
+        is_text_card = f.stat().st_size < SIZE_THRESHOLD
+
+        if is_text_card:
+            title = ocr_title(f, fallback=f"Note d'intention {group_num}")
+        else:
+            title = clean_title(stem)
+
         slug_base = slugify(title)
         n = seen_slugs.get(slug_base, 0)
         seen_slugs[slug_base] = n + 1
         slug = slug_base if n == 0 else f"{slug_base}-{n+1}"
         if n > 0:
-            title = f"{title} (variante {n+1})"
+            title = f"{title} (suite)" if is_text_card else f"{title} (variante {n+1})"
 
         thumb_out = THUMBS_DIR / f"{slug}.jpg"
         full_out = FULL_DIR / f"{slug}.jpg"
-        print(f"→ {f.name}  =>  {slug}")
-        process_image(f, thumb_out, THUMB_MAX_DIM)
-        process_image(f, full_out, FULL_MAX_DIM)
+        kind = "texte" if is_text_card else "œuvre"
+        print(f"→ [{kind}] {f.name}  =>  {slug}")
+        process_image(f, thumb_out, THUMB_MAX_DIM, watermark=not is_text_card)
+        process_image(f, full_out, FULL_MAX_DIM, watermark=not is_text_card)
 
         entries.append({
             "id": slug,
             "title": title,
-            "order": order_num,
+            "order": position,
+            "type": "text" if is_text_card else "artwork",
             "thumb": f"images/thumbs/{slug}.jpg",
             "full": f"images/full/{slug}.jpg",
         })
 
-    entries.sort(key=lambda e: (e["order"], e["title"]))
+    entries.sort(key=lambda e: e["order"])
     MANIFEST_PATH.write_text(json.dumps(entries, ensure_ascii=False, indent=2))
-    print(f"\n{len(entries)} œuvres exportées. Manifest : {MANIFEST_PATH}")
+    print(f"\n{len(entries)} éléments exportés ({sum(1 for e in entries if e['type']=='artwork')} œuvres, "
+          f"{sum(1 for e in entries if e['type']=='text')} cartons de texte). Manifest : {MANIFEST_PATH}")
 
 
 if __name__ == "__main__":
