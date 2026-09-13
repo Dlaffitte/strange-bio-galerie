@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strange Bio — Galerie d'œuvres</title>
+<meta name="description" content="Strange Bio — les super héros de Bonbobiomix combattent la malbouffe. Galerie d'œuvres en aperçu.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body oncontextmenu="return false">
+<header class="site-header">
+  <h1>Strange Bio</h1>
+  <p class="notice">Aperçu en ligne — images filigranées, non contractuelles. Pour toute demande (fichiers HD, acquisition, exposition), merci de contacter l'artiste.</p>
+</header>
+
+<main>
+  <div id="gallery" class="gallery"></div>
+  <p id="empty-state" class="empty-state" hidden>Aucune œuvre trouvée. Vérifiez que <code>images/manifest.json</code> a bien été généré.</p>
+</main>
+
+<div id="lightbox" class="lightbox" hidden>
+  <button class="lightbox-close" aria-label="Fermer">&times;</button>
+  <button class="lightbox-nav lightbox-prev" aria-label="Précédent">&#8249;</button>
+  <button class="lightbox-nav lightbox-next" aria-label="Suivant">&#8250;</button>
+  <figure>
+    <img id="lightbox-img" src="" alt="" draggable="false">
+    <figcaption id="lightbox-caption"></figcaption>
+  </figure>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; <span id="year"></span> Strange Bio. Toutes les images sont protégées par le droit d'auteur et diffusées ici uniquement à titre d'aperçu.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
