@@ -5,7 +5,6 @@
 
   var gallery = document.getElementById("gallery");
   var emptyState = document.getElementById("empty-state");
-  var viewStats = document.getElementById("view-stats");
 
   var lightbox = document.getElementById("lightbox");
   var lightboxImg = document.getElementById("lightbox-img");
@@ -16,46 +15,21 @@
   var prevBtn = document.getElementById("lightbox-prev");
   var nextBtn = document.getElementById("lightbox-next");
 
-  var filterBtns = document.querySelectorAll(".filter-btn");
-  var countAll = document.getElementById("count-all");
-  var countArtwork = document.getElementById("count-artwork");
-  var countText = document.getElementById("count-text");
-
-  var allItems = [];
-  var filteredItems = [];
-  var currentFilter = "all";
-  var currentFilteredIndex = -1;
+  var items = [];
+  var currentIndex = -1;
 
   function renderGallery() {
     gallery.innerHTML = "";
 
-    if (currentFilter === "all") {
-      filteredItems = allItems;
-    } else {
-      filteredItems = allItems.filter(function (item) {
-        return item.type === currentFilter;
-      });
-    }
-
-    if (filteredItems.length === 0) {
+    if (!items.length) {
       emptyState.hidden = false;
-    } else {
-      emptyState.hidden = true;
+      return;
     }
-
-    if (viewStats) {
-      if (currentFilter === "all") {
-        viewStats.textContent = "Affichage séquentiel (" + filteredItems.length + " pièces)";
-      } else if (currentFilter === "artwork") {
-        viewStats.textContent = "Affichage des œuvres (" + filteredItems.length + " pièces)";
-      } else {
-        viewStats.textContent = "Affichage des cartons et textes (" + filteredItems.length + " pièces)";
-      }
-    }
+    emptyState.hidden = true;
 
     var frag = document.createDocumentFragment();
 
-    filteredItems.forEach(function (item, idx) {
+    items.forEach(function (item, idx) {
       var card = document.createElement("article");
       card.className = "card" + (item.type === "text" ? " card-text" : "");
       card.setAttribute("tabindex", "0");
@@ -77,8 +51,8 @@
 
       var indexBadge = document.createElement("span");
       indexBadge.className = "card-index";
-      var originalIndex = allItems.indexOf(item) + 1;
-      indexBadge.textContent = "#" + (originalIndex < 10 ? "0" + originalIndex : originalIndex);
+      var displayNum = idx + 1;
+      indexBadge.textContent = "#" + (displayNum < 10 ? "0" + displayNum : displayNum);
 
       media.appendChild(img);
       media.appendChild(badge);
@@ -117,17 +91,16 @@
     gallery.appendChild(frag);
   }
 
-  function openLightbox(filteredIdx) {
-    if (!filteredItems.length) return;
-    currentFilteredIndex = filteredIdx;
-    var item = filteredItems[filteredIdx];
+  function openLightbox(idx) {
+    if (!items.length) return;
+    currentIndex = idx;
+    var item = items[idx];
 
     lightboxImg.src = item.full;
     lightboxImg.alt = item.title;
     lightboxTitle.textContent = item.title;
 
-    var globalIndex = allItems.indexOf(item) + 1;
-    lightboxCounter.textContent = (filteredIdx + 1) + " / " + filteredItems.length + " (N°" + globalIndex + ")";
+    lightboxCounter.textContent = (idx + 1) + " / " + items.length;
     
     if (item.type === "text") {
       lightboxTag.textContent = "📜 Carton / Texte";
@@ -152,8 +125,8 @@
   }
 
   function showRelative(delta) {
-    if (!filteredItems.length) return;
-    var next = (currentFilteredIndex + delta + filteredItems.length) % filteredItems.length;
+    if (!items.length) return;
+    var next = (currentIndex + delta + items.length) % items.length;
     openLightbox(next);
   }
 
@@ -194,20 +167,6 @@
     }
   }, { passive: true });
 
-  // Gestion des filtres
-  filterBtns.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      filterBtns.forEach(function (b) {
-        b.classList.remove("active");
-        b.setAttribute("aria-selected", "false");
-      });
-      btn.classList.add("active");
-      btn.setAttribute("aria-selected", "true");
-      currentFilter = btn.dataset.filter;
-      renderGallery();
-    });
-  });
-
   // Protection anti-copie basique
   document.addEventListener("dragstart", function (e) { e.preventDefault(); });
   document.addEventListener("keydown", function (e) {
@@ -221,14 +180,7 @@
   fetch("images/manifest.json")
     .then(function (res) { return res.json(); })
     .then(function (data) {
-      allItems = data;
-      var artCount = allItems.filter(function (i) { return i.type === "artwork"; }).length;
-      var textCount = allItems.filter(function (i) { return i.type === "text"; }).length;
-
-      if (countAll) countAll.textContent = allItems.length;
-      if (countArtwork) countArtwork.textContent = artCount;
-      if (countText) countText.textContent = textCount;
-
+      items = data;
       renderGallery();
     })
     .catch(function (err) {
