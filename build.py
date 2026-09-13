@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Génère le site vitrine "Strange Bio" à partir du dossier source d'œuvres.
+Génère le site vitrine "Bonbobio" à partir du dossier source d'œuvres.
 
 - Toutes les images du diaporama sont incluses : les œuvres (fichiers
   > SIZE_THRESHOLD) ET les cartons de texte/intention (fichiers plus légers,
@@ -25,6 +25,11 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 try:
     import pytesseract  # OCR optionnel : utilisé pour titrer les cartons de texte
+    # Désactivé par défaut : la reconnaissance de texte sur ces cartons
+    # (police stylisée) produit des titres peu fiables ("B10" pour "Bio",
+    # mots tronqués...). On garde un identifiant simple et lisible à la
+    # place ; réactiver ci-dessous si l'OCR est amélioré/relu manuellement.
+    pytesseract = None
 except ImportError:
     pytesseract = None
 
@@ -35,7 +40,7 @@ FULL_DIR = SITE_DIR / "images" / "full"
 MANIFEST_PATH = SITE_DIR / "images" / "manifest.json"
 
 SIZE_THRESHOLD = 500_000  # octets : sépare cartons de texte (petits) des œuvres (gros)
-WATERMARK_TEXT = "STRANGE BIO \u2022 APERÇU \u2022 NE PAS COPIER"
+WATERMARK_TEXT = "BONBOBIO \u2022 APERÇU \u2022 NE PAS COPIER"
 FULL_MAX_DIM = 1400
 THUMB_MAX_DIM = 520
 JPEG_QUALITY = 78
@@ -133,7 +138,7 @@ def process_image(src_path: Path, out_path: Path, max_dim: int, watermark: bool)
         # ajoute une mention de copyright discrète en bas d'image, plus lisible
         draw = ImageDraw.Draw(combined)
         font = load_font(max(14, combined.size[0] // 45))
-        label = "\u00a9 Strange Bio — aperçu non contractuel"
+        label = "\u00a9 Bonbobio — aperçu non contractuel"
         tw = draw.textlength(label, font=font)
         pad = 10
         x = combined.size[0] - tw - pad * 2

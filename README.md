@@ -1,6 +1,6 @@
-# Strange Bio — site vitrine
+# Bonbobio — site vitrine
 
-Site statique présentant les œuvres de la série *Strange Bio* avec un
+Site statique présentant les œuvres de la série *Bonbobio* avec un
 filigrane anti-copie **gravé dans les images** (pas seulement en CSS), pour
 pouvoir partager un simple lien de consultation sans risquer que les visuels
 soient réutilisés en haute définition.
