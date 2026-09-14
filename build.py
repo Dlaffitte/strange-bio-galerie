@@ -40,7 +40,7 @@ FULL_DIR = SITE_DIR / "images" / "full"
 MANIFEST_PATH = SITE_DIR / "images" / "manifest.json"
 
 SIZE_THRESHOLD = 500_000  # octets : sépare cartons de texte (petits) des œuvres (gros)
-WATERMARK_TEXT = "BONBOBIO \u2022 APERÇU \u2022 NE PAS COPIER"
+WATERMARK_TEXT = "BONBOBIO"
 FULL_MAX_DIM = 1400
 THUMB_MAX_DIM = 520
 JPEG_QUALITY = 78
@@ -80,6 +80,42 @@ def slugify(text: str) -> str:
     return text or "oeuvre"
 
 
+def get_dominant_color(img: Image.Image) -> tuple:
+    """Estime la couleur dominante d'une image (échantillon réduit + quantification)."""
+    small = img.convert("RGB").copy()
+    small.thumbnail((150, 150))
+    try:
+        result = small.quantize(colors=6, method=Image.MEDIANCUT)
+        palette = result.getpalette()
+        counts = sorted(result.getcolors(), reverse=True)
+        _, idx = counts[0]
+        r, g, b = palette[idx * 3: idx * 3 + 3]
+        return (r, g, b)
+    except Exception:
+        return (255, 255, 255)
+
+
+def watermark_color_from_dominant(rgb: tuple) -> tuple:
+    """Dérive une couleur de filigrane lisible à partir de la couleur dominante :
+    on éclaircit les teintes sombres et on assombrit les teintes claires, pour
+    garder un filigrane visible mais toujours accordé à l'image."""
+    r, g, b = rgb
+    luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+
+    def clamp(v):
+        return max(0, min(255, int(round(v))))
+
+    if luminance > 0.55:
+        # couleur claire -> on l'assombrit pour qu'elle reste visible
+        r2, g2, b2 = r * 0.4, g * 0.4, b * 0.4
+    else:
+        # couleur sombre -> on l'éclaircit
+        r2 = r + (255 - r) * 0.6
+        g2 = g + (255 - g) * 0.6
+        b2 = b + (255 - b) * 0.6
+    return (clamp(r2), clamp(g2), clamp(b2))
+
+
 def load_font(size: int) -> ImageFont.FreeTypeFont:
     candidates = [
         "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
@@ -92,7 +128,7 @@ def load_font(size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
-def make_watermark_layer(size, text=WATERMARK_TEXT):
+def make_watermark_layer(size, text=WATERMARK_TEXT, color=(255, 255, 255)):
     """Crée un calque RGBA de filigrane répété en diagonale."""
     w, h = size
     layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
@@ -103,12 +139,13 @@ def make_watermark_layer(size, text=WATERMARK_TEXT):
     font = load_font(font_size)
     step_y = font_size * 4
     step_x_text = font_size * len(text) // 2 + font_size * 6
+    fill = (color[0], color[1], color[2], 110)
     y = 0
     row = 0
     while y < diag:
         x = -diag if row % 2 == 0 else -diag // 2
         while x < diag:
-            draw.text((x, y), text, font=font, fill=(255, 255, 255, 90))
+            draw.text((x, y), text, font=font, fill=fill)
             x += step_x_text
         y += step_y
         row += 1
@@ -131,8 +168,11 @@ def process_image(src_path: Path, out_path: Path, max_dim: int, watermark: bool)
         img = img.resize((max(1, int(w * scale)), max(1, int(h * scale))), Image.LANCZOS)
 
     if watermark:
+        dominant = get_dominant_color(img)
+        wm_color = watermark_color_from_dominant(dominant)
+
         rgba = img.convert("RGBA")
-        wm = make_watermark_layer(rgba.size)
+        wm = make_watermark_layer(rgba.size, color=wm_color)
         combined = Image.alpha_composite(rgba, wm).convert("RGB")
 
         # ajoute une mention de copyright discrète en bas d'image, plus lisible
@@ -222,15 +262,31 @@ def main():
             "id": slug,
             "title": title,
             "order": position,
+            "group": group_num,
             "type": "text" if is_text_card else "artwork",
             "thumb": f"images/thumbs/{slug}.jpg",
             "full": f"images/full/{slug}.jpg",
         })
 
     entries.sort(key=lambda e: e["order"])
-    MANIFEST_PATH.write_text(json.dumps(entries, ensure_ascii=False, indent=2))
+
+    # Regroupe les entrées par groupe (texte + œuvre(s) d'une même pièce)
+    # afin que le site puisse afficher le carton de texte au-dessus/en dessous
+    # de l'illustration correspondante, plutôt qu'en grille façon planche de livre.
+    groups = []
+    groups_by_num = {}
+    for e in entries:
+        g = groups_by_num.get(e["group"])
+        if g is None:
+            g = {"group": e["group"], "items": []}
+            groups_by_num[e["group"]] = g
+            groups.append(g)
+        g["items"].append(e)
+
+    MANIFEST_PATH.write_text(json.dumps(groups, ensure_ascii=False, indent=2))
     print(f"\n{len(entries)} éléments exportés ({sum(1 for e in entries if e['type']=='artwork')} œuvres, "
-          f"{sum(1 for e in entries if e['type']=='text')} cartons de texte). Manifest : {MANIFEST_PATH}")
+          f"{sum(1 for e in entries if e['type']=='text')} cartons de texte) en {len(groups)} groupes. "
+          f"Manifest : {MANIFEST_PATH}")
 
 
 if __name__ == "__main__":

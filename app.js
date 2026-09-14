@@ -14,13 +14,15 @@
   var prevBtn = document.getElementById("lightbox-prev");
   var nextBtn = document.getElementById("lightbox-next");
 
-  var items = [];
+  var groups = [];
+  var flatItems = []; // pour la navigation prev/next de la visionneuse
   var currentIndex = -1;
 
-  function renderGallery() {
+  function renderStory() {
     gallery.innerHTML = "";
+    flatItems = [];
 
-    if (!items.length) {
+    if (!groups.length) {
       emptyState.hidden = false;
       return;
     }
@@ -28,68 +30,106 @@
 
     var frag = document.createDocumentFragment();
 
-    items.forEach(function (item, idx) {
-      var card = document.createElement("article");
-      card.className = "card" + (item.type === "text" ? " card-text" : "");
-      card.setAttribute("tabindex", "0");
-      card.setAttribute("role", "button");
-      card.setAttribute("aria-label", item.title + " (ouvrir l'aperçu)");
+    groups.forEach(function (group, groupIdx) {
+      var textItems = group.items.filter(function (i) { return i.type === "text"; });
+      var artworkItems = group.items.filter(function (i) { return i.type === "artwork"; });
 
-      var media = document.createElement("div");
-      media.className = "card-media";
+      var section = document.createElement("section");
+      section.className = "work";
 
-      var img = document.createElement("img");
-      img.src = item.thumb;
-      img.alt = item.title;
-      img.loading = "lazy";
-      img.draggable = false;
+      var indexLabel = document.createElement("div");
+      indexLabel.className = "work-index";
+      var num = groupIdx + 1;
+      indexLabel.textContent = "Pièce " + (num < 10 ? "0" + num : num);
+      section.appendChild(indexLabel);
 
-      var indexBadge = document.createElement("span");
-      indexBadge.className = "card-index";
-      var displayNum = idx + 1;
-      indexBadge.textContent = "#" + (displayNum < 10 ? "0" + displayNum : displayNum);
+      if (textItems.length) {
+        var textsWrap = document.createElement("div");
+        textsWrap.className = "work-texts";
+        textItems.forEach(function (item) {
+          var flatIdx = flatItems.length;
+          flatItems.push(item);
 
-      media.appendChild(img);
-      media.appendChild(indexBadge);
+          var card = document.createElement("div");
+          card.className = "text-card";
+          card.setAttribute("tabindex", "0");
+          card.setAttribute("role", "button");
+          card.setAttribute("aria-label", item.title + " (ouvrir l'aperçu)");
 
-      var info = document.createElement("div");
-      info.className = "card-info";
+          var img = document.createElement("img");
+          img.src = item.thumb;
+          img.alt = item.title;
+          img.loading = "lazy";
+          img.draggable = false;
 
-      var title = document.createElement("h2");
-      title.className = "card-title";
-      title.textContent = item.title;
+          card.appendChild(img);
+          card.addEventListener("click", function () { openLightbox(flatIdx); });
+          card.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openLightbox(flatIdx);
+            }
+          });
 
-      info.appendChild(title);
+          textsWrap.appendChild(card);
+        });
+        section.appendChild(textsWrap);
+      }
 
-      card.appendChild(media);
-      card.appendChild(info);
+      if (artworkItems.length) {
+        var artsWrap = document.createElement("div");
+        artsWrap.className = "work-artworks";
+        artworkItems.forEach(function (item) {
+          var flatIdx = flatItems.length;
+          flatItems.push(item);
 
-      card.addEventListener("click", function () {
-        openLightbox(idx);
-      });
-      card.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          openLightbox(idx);
-        }
-      });
+          var card = document.createElement("div");
+          card.className = "artwork-card";
+          card.setAttribute("tabindex", "0");
+          card.setAttribute("role", "button");
+          card.setAttribute("aria-label", item.title + " (ouvrir l'aperçu)");
 
-      frag.appendChild(card);
+          var img = document.createElement("img");
+          img.src = item.thumb;
+          img.alt = item.title;
+          img.loading = "lazy";
+          img.draggable = false;
+
+          card.appendChild(img);
+          card.addEventListener("click", function () { openLightbox(flatIdx); });
+          card.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openLightbox(flatIdx);
+            }
+          });
+
+          artsWrap.appendChild(card);
+        });
+        section.appendChild(artsWrap);
+
+        var caption = document.createElement("div");
+        caption.className = "work-caption";
+        caption.textContent = artworkItems.map(function (i) { return i.title; }).join(" · ");
+        section.appendChild(caption);
+      }
+
+      frag.appendChild(section);
     });
 
     gallery.appendChild(frag);
   }
 
   function openLightbox(idx) {
-    if (!items.length) return;
+    if (!flatItems.length) return;
     currentIndex = idx;
-    var item = items[idx];
+    var item = flatItems[idx];
 
     lightboxImg.src = item.full;
     lightboxImg.alt = item.title;
     lightboxTitle.textContent = item.title;
 
-    lightboxCounter.textContent = (idx + 1) + " / " + items.length;
+    lightboxCounter.textContent = (idx + 1) + " / " + flatItems.length;
 
     lightbox.hidden = false;
     document.body.style.overflow = "hidden";
@@ -102,8 +142,8 @@
   }
 
   function showRelative(delta) {
-    if (!items.length) return;
-    var next = (currentIndex + delta + items.length) % items.length;
+    if (!flatItems.length) return;
+    var next = (currentIndex + delta + flatItems.length) % flatItems.length;
     openLightbox(next);
   }
 
@@ -153,12 +193,12 @@
     }
   });
 
-  // Chargement des données
+  // Chargement des données (groupes texte + illustration)
   fetch("images/manifest.json")
     .then(function (res) { return res.json(); })
     .then(function (data) {
-      items = data;
-      renderGallery();
+      groups = data;
+      renderStory();
     })
     .catch(function (err) {
       console.error("Impossible de charger la galerie :", err);

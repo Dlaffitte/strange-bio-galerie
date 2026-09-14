@@ -161,102 +161,126 @@ html, body {
   padding: 12px clamp(16px, 4vw, 48px) 80px;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
+/* Flux vertical "story" : chaque pièce = un bloc texte + illustration(s) */
+.story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 880px;
+  margin: 0 auto;
 }
 
-/* Carte de la galerie */
-.card {
+.work {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 64px 0;
+}
+
+.work + .work {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.work-index {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.work-index::before,
+.work-index::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+/* Cartons de texte : rendus comme un feuillet clair, plus petit, au-dessus */
+.work-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.text-card {
+  background: #fdfdfb;
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.text-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.text-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+/* Illustrations : grand format, mises en avant */
+.work-artworks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.artwork-card {
   position: relative;
-  background: var(--bg-card);
   border-radius: var(--radius-card);
   overflow: hidden;
   cursor: pointer;
   border: 1px solid var(--border-card);
   box-shadow: var(--shadow-card);
+  background: #06070a;
   transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-  display: flex;
-  flex-direction: column;
+  max-width: 720px;
+  width: 100%;
 }
 
-.card:hover {
-  transform: translateY(-8px);
+.artwork-card:hover {
+  transform: translateY(-6px);
   box-shadow: var(--shadow-hover);
   border-color: var(--border-card-hover);
 }
 
-.card-media {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  background: #06070a;
-}
-
-.card-media img {
+.artwork-card img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   -webkit-user-drag: none;
   user-drag: none;
 }
 
-.card:hover .card-media img {
-  transform: scale(1.05);
+.artwork-card:hover img {
+  transform: scale(1.03);
 }
 
-.card.card-text .card-media {
-  background: #ffffff;
-}
-
-.card.card-text .card-media img {
-  object-fit: contain;
-  padding: 8px;
-}
-
-.card-index {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  background: rgba(0, 0, 0, 0.65);
-  color: var(--accent);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 2;
-}
-
-/* Pied de carte */
-.card-info {
-  padding: 14px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-surface) 100%);
-  border-top: 1px solid var(--border-subtle);
-  flex-grow: 1;
-}
-
-.card-title {
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--text-main);
-  line-height: 1.35;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.card.card-text .card-title {
-  color: var(--text-main);
+.work-caption {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-align: center;
+  max-width: 480px;
 }
 
 .empty-state {
@@ -475,12 +499,13 @@ html, body {
     gap: 14px;
   }
 
-  .card-info {
-    padding: 10px 12px;
+  .work {
+    gap: 18px;
+    padding: 44px 0;
   }
 
-  .card-title {
-    font-size: 0.82rem;
+  .work-texts {
+    max-width: 100%;
   }
 
   .lightbox-content {
