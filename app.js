@@ -132,6 +132,110 @@
 
     lightbox.hidden = false;
     document.body.style.overflow = "hidden";
+
+    applyDominantBackground(lightboxImg);
+  }
+
+  // Estime la couleur dominante de l'image affichée (moyenne de pixels sur
+  // une vignette réduite) pour teinter l'arrière-plan de la visionneuse.
+  var glowCanvas = document.createElement("canvas");
+  var glowCtx = glowCanvas.getContext && glowCanvas.getContext("2d");
+
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h = 0, s = 0, l = (max + min) / 2;
+    var d = max - min;
+    if (d !== 0) {
+      s = d / (1 - Math.abs(2 * l - 1));
+      switch (max) {
+        case r: h = ((g - b) / d) % 6; break;
+        case g: h = (b - r) / d + 2; break;
+        default: h = (r - g) / d + 4;
+      }
+      h *= 60;
+      if (h < 0) h += 360;
+    }
+    return [h, s, l];
+  }
+
+  function hslToRgb(h, s, l) {
+    var c = (1 - Math.abs(2 * l - 1)) * s;
+    var x = c * (1 - Math.abs((h / 60) % 2 - 1));
+    var m = l - c / 2;
+    var rp, gp, bp;
+    if (h < 60) { rp = c; gp = x; bp = 0; }
+    else if (h < 120) { rp = x; gp = c; bp = 0; }
+    else if (h < 180) { rp = 0; gp = c; bp = x; }
+    else if (h < 240) { rp = 0; gp = x; bp = c; }
+    else if (h < 300) { rp = x; gp = 0; bp = c; }
+    else { rp = c; gp = 0; bp = x; }
+    return [
+      Math.round((rp + m) * 255),
+      Math.round((gp + m) * 255),
+      Math.round((bp + m) * 255)
+    ];
+  }
+
+  function applyDominantBackground(imgEl) {
+    if (!glowCtx) return;
+
+    function extract() {
+      var w = 40, h = 40;
+      glowCanvas.width = w;
+      glowCanvas.height = h;
+      try {
+        // Recadre sur le centre de l'image (les scans d'origine ont souvent
+        // une marge blanche qui fausserait la moyenne vers le blanc).
+        var iw = imgEl.naturalWidth, ih = imgEl.naturalHeight;
+        var cropW = iw * 0.7, cropH = ih * 0.7;
+        var sx = (iw - cropW) / 2, sy = (ih - cropH) / 2;
+        glowCtx.drawImage(imgEl, sx, sy, cropW, cropH, 0, 0, w, h);
+        var data = glowCtx.getImageData(0, 0, w, h).data;
+        var r = 0, g = 0, b = 0, count = 0;
+        for (var i = 0; i < data.length; i += 4) {
+          var pr = data[i], pg = data[i + 1], pb = data[i + 2];
+          // Ignore les pixels quasi blancs/noirs pour privilégier les
+          // couleurs vraiment caractéristiques de l'image.
+          var isNearWhite = pr > 235 && pg > 235 && pb > 235;
+          var isNearBlack = pr < 20 && pg < 20 && pb < 20;
+          if (isNearWhite || isNearBlack) continue;
+          r += pr;
+          g += pg;
+          b += pb;
+          count++;
+        }
+        if (count < 10) {
+          // Image trop uniforme (peu de pixels colorés) : refait le calcul sans filtre.
+          count = 0; r = 0; g = 0; b = 0;
+          for (var j = 0; j < data.length; j += 4) {
+            r += data[j];
+            g += data[j + 1];
+            b += data[j + 2];
+            count++;
+          }
+        }
+        r = Math.round(r / count);
+        g = Math.round(g / count);
+        b = Math.round(b / count);
+
+        // Renforce la saturation pour un halo plus visible et fidèle.
+        var hsl = rgbToHsl(r, g, b);
+        hsl[1] = Math.min(1, hsl[1] * 2.1 + 0.15);
+        hsl[2] = Math.min(0.58, Math.max(0.32, hsl[2]));
+        var boosted = hslToRgb(hsl[0], hsl[1], hsl[2]);
+
+        lightbox.style.setProperty("--glow-color", boosted[0] + "," + boosted[1] + "," + boosted[2]);
+      } catch (err) {
+        // Image non lisible par le canvas (rare, cas cross-origin) : on garde le fond neutre.
+      }
+    }
+
+    if (imgEl.complete && imgEl.naturalWidth) {
+      extract();
+    } else {
+      imgEl.addEventListener("load", extract, { once: true });
+    }
   }
 
   function closeLightbox() {
