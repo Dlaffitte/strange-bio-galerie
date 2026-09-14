@@ -35,6 +35,12 @@ FULL_DIR = SITE_DIR / "images" / "full"
 MANIFEST_PATH = SITE_DIR / "images" / "manifest.json"
 
 SIZE_THRESHOLD = 500_000  # octets : sépare cartons de texte (petits) des œuvres (gros)
+
+# Fichiers source à ignorer volontairement (retirés du site sur demande).
+EXCLUDED_FILES = {
+    "3.2Bonbobiohazard LaSaillanteA4CMJN.jpg",  # "Bonbobiohazard (variante 2)"
+}
+
 WATERMARK_TEXT = "BONBOBIO"
 FULL_MAX_DIM = 1400
 THUMB_MAX_DIM = 520
@@ -242,6 +248,7 @@ def main():
     entries = []
     seen_slugs = {}
     files = sorted(SOURCE_DIR.glob("*.jpg")) + sorted(SOURCE_DIR.glob("*.jpeg"))
+    files = [f for f in files if f.name not in EXCLUDED_FILES]
 
     def order_key(path: Path):
         """Ordre naturel du diaporama : groupe numérique (1, 2, 3…, pas
