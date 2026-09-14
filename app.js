@@ -21,6 +21,8 @@
   function renderStory() {
     gallery.innerHTML = "";
     flatItems = [];
+    if (scrollGlowObserver) scrollGlowObserver.disconnect();
+    visibleArtworks.clear();
 
     if (!groups.length) {
       emptyState.hidden = false;
@@ -75,6 +77,10 @@
             openLightbox(flatIdx);
           }
         });
+
+        if (isArtwork) {
+          observeScrollGlow(img);
+        }
 
         var wrap = document.createElement("div");
         wrap.className = isArtwork ? "work-artworks" : "work-texts";
@@ -178,7 +184,20 @@
   }
 
   function applyDominantBackground(imgEl) {
+    computeDominantColor(imgEl, function (rgb) {
+      lightbox.style.setProperty("--glow-color", rgb[0] + "," + rgb[1] + "," + rgb[2]);
+    });
+  }
+
+  var colorCache = {}; // src -> [r,g,b], évite de recalculer la même image en boucle
+
+  function computeDominantColor(imgEl, onReady) {
     if (!glowCtx) return;
+    var cacheKey = imgEl.currentSrc || imgEl.src;
+    if (colorCache[cacheKey]) {
+      onReady(colorCache[cacheKey]);
+      return;
+    }
 
     function extract() {
       var w = 40, h = 40;
@@ -225,7 +244,8 @@
         hsl[2] = Math.min(0.58, Math.max(0.32, hsl[2]));
         var boosted = hslToRgb(hsl[0], hsl[1], hsl[2]);
 
-        lightbox.style.setProperty("--glow-color", boosted[0] + "," + boosted[1] + "," + boosted[2]);
+        colorCache[cacheKey] = boosted;
+        onReady(boosted);
       } catch (err) {
         // Image non lisible par le canvas (rare, cas cross-origin) : on garde le fond neutre.
       }
@@ -236,6 +256,48 @@
     } else {
       imgEl.addEventListener("load", extract, { once: true });
     }
+  }
+
+  // --- Halo d'arrière-plan qui suit le défilement de la page ---
+  // Repère, parmi les œuvres visibles à l'écran, celle la plus proche du
+  // centre du viewport, et teinte le fond du site avec sa couleur dominante.
+  var scrollGlowEl = document.querySelector(".scroll-glow");
+  var visibleArtworks = new Map(); // img -> ratio d'intersection
+  var scrollGlowObserver = null;
+
+  if (scrollGlowEl && "IntersectionObserver" in window) {
+    scrollGlowObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            visibleArtworks.set(entry.target, entry.intersectionRatio);
+          } else {
+            visibleArtworks.delete(entry.target);
+          }
+        });
+        updateScrollGlow();
+      },
+      { threshold: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1] }
+    );
+  }
+
+  function observeScrollGlow(imgEl) {
+    if (scrollGlowObserver) scrollGlowObserver.observe(imgEl);
+  }
+
+  function updateScrollGlow() {
+    if (!scrollGlowEl || !visibleArtworks.size) return;
+    var bestImg = null, bestRatio = -1;
+    visibleArtworks.forEach(function (ratio, img) {
+      if (ratio > bestRatio) {
+        bestRatio = ratio;
+        bestImg = img;
+      }
+    });
+    if (!bestImg) return;
+    computeDominantColor(bestImg, function (rgb) {
+      scrollGlowEl.style.setProperty("--scroll-glow-color", rgb[0] + "," + rgb[1] + "," + rgb[2]);
+    });
   }
 
   function closeLightbox() {
