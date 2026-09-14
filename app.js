@@ -40,11 +40,12 @@
       indexLabel.textContent = "Pièce " + (num < 10 ? "0" + num : num);
       section.appendChild(indexLabel);
 
-      // Les éléments d'un groupe sont déjà dans l'ordre naturel du diaporama :
-      // on les rend tels quels, afin que la légende apparaisse avant ou après
-      // l'illustration selon sa position d'origine (au lieu de toujours forcer
-      // le texte au-dessus).
-      group.items.forEach(function (item) {
+      // Toutes les illustrations du groupe d'abord, puis toutes les
+      // légendes (texte OCR ou carton image de secours) en dessous.
+      var artworkItems = group.items.filter(function (i) { return i.type === "artwork"; });
+      var textItems = group.items.filter(function (i) { return i.type === "text"; });
+
+      artworkItems.concat(textItems).forEach(function (item) {
         if (item.type === "text" && item.caption) {
           section.appendChild(buildCaptionBlock(item));
           return;
