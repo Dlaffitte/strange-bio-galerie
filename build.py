@@ -24,12 +24,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 try:
-    import pytesseract  # OCR optionnel : utilisé pour titrer les cartons de texte
-    # Désactivé par défaut : la reconnaissance de texte sur ces cartons
-    # (police stylisée) produit des titres peu fiables ("B10" pour "Bio",
-    # mots tronqués...). On garde un identifiant simple et lisible à la
-    # place ; réactiver ci-dessous si l'OCR est amélioré/relu manuellement.
-    pytesseract = None
+    import pytesseract  # OCR : extrait le texte des cartons pour l'afficher en légende HTML
 except ImportError:
     pytesseract = None
 
@@ -44,6 +39,7 @@ WATERMARK_TEXT = "BONBOBIO"
 FULL_MAX_DIM = 1400
 THUMB_MAX_DIM = 520
 JPEG_QUALITY = 78
+OCR_CONFIDENCE_THRESHOLD = 70  # confiance moyenne Tesseract minimale pour garder le texte
 
 NOISE_SUBSTRINGS = [
     r"la\s*saillante", r"copie", r"copy", r"cmjn", r"\btif\b", r"\ba4\b",
@@ -192,23 +188,48 @@ def process_image(src_path: Path, out_path: Path, max_dim: int, watermark: bool)
     combined.save(out_path, "JPEG", quality=JPEG_QUALITY, optimize=True)
 
 
-def ocr_title(src_path: Path, fallback: str) -> str:
-    """Essaie d'extraire le texte d'un carton de présentation via OCR.
-    Retombe sur `fallback` si l'OCR n'est pas disponible ou échoue."""
+def extract_caption(src_path: Path):
+    """Extrait le texte intégral d'un carton (via OCR) pour l'afficher en
+    légende HTML plutôt qu'en image. Renvoie une liste de lignes nettoyées,
+    ou None si l'OCR est indisponible, peu fiable (police stylisée trop
+    dégradée) ou n'a rien détecté d'exploitable."""
     if pytesseract is None:
-        return fallback
+        return None
     try:
         img = Image.open(src_path)
         img = ImageOps.exif_transpose(img).convert("L")
+
+        # Vérifie la fiabilité de la lecture avant de s'y fier : certains
+        # cartons utilisent une police stylisée (petites capitales) trop fine
+        # pour l'OCR, qui produit alors un texte proche du charabia. On mesure
+        # la confiance moyenne de Tesseract et on abandonne en dessous du seuil,
+        # pour retomber sur l'affichage de l'image d'origine dans ce cas.
+        data = pytesseract.image_to_data(img, lang="fra", output_type=pytesseract.Output.DICT)
+        confidences = [int(c) for c in data.get("conf", []) if int(c) >= 0]
+        if not confidences:
+            return None
+        avg_confidence = sum(confidences) / len(confidences)
+        if avg_confidence < OCR_CONFIDENCE_THRESHOLD:
+            return None
+
         text = pytesseract.image_to_string(img, lang="fra")
-        lines = [l.strip() for l in text.splitlines() if l.strip()]
-        if not lines:
-            return fallback
-        title = lines[0]
-        title = re.sub(r"\s+", " ", title).strip(" .")
-        return title[:80] if title else fallback
+        lines = []
+        for raw_line in text.splitlines():
+            line = raw_line.strip()
+            if not line:
+                continue
+            line = re.sub(r"\s+", " ", line)
+            line = re.sub(r"'\s+", "'", line)  # "L' ADOPTION" -> "L'ADOPTION"
+            line = line.strip(" .")
+            if line:
+                lines.append(line)
+        # Un carton illisible produit souvent 0 ou 1 fragment très court.
+        total_chars = sum(len(l) for l in lines)
+        if not lines or total_chars < 8:
+            return None
+        return lines
     except Exception:
-        return fallback
+        return None
 
 
 def main():
@@ -239,8 +260,10 @@ def main():
         group_num = int(m.group(1)) if m else 999
         is_text_card = f.stat().st_size < SIZE_THRESHOLD
 
+        caption_lines = None
         if is_text_card:
-            title = ocr_title(f, fallback=f"Note d'intention {group_num}")
+            caption_lines = extract_caption(f)
+            title = caption_lines[0] if caption_lines else f"Note d'intention {group_num}"
         else:
             title = clean_title(stem)
 
@@ -251,22 +274,30 @@ def main():
         if n > 0:
             title = f"{title} (suite)" if is_text_card else f"{title} (variante {n+1})"
 
-        thumb_out = THUMBS_DIR / f"{slug}.jpg"
-        full_out = FULL_DIR / f"{slug}.jpg"
-        kind = "texte" if is_text_card else "œuvre"
-        print(f"→ [{kind}] {f.name}  =>  {slug}")
-        process_image(f, thumb_out, THUMB_MAX_DIM, watermark=not is_text_card)
-        process_image(f, full_out, FULL_MAX_DIM, watermark=not is_text_card)
-
-        entries.append({
+        entry = {
             "id": slug,
             "title": title,
             "order": position,
             "group": group_num,
             "type": "text" if is_text_card else "artwork",
-            "thumb": f"images/thumbs/{slug}.jpg",
-            "full": f"images/full/{slug}.jpg",
-        })
+        }
+
+        if is_text_card and caption_lines:
+            # Carton lu avec succès par l'OCR : affiché en légende HTML,
+            # pas besoin de générer d'image pour ce fragment.
+            print(f"→ [texte OCR] {f.name}  =>  {slug}")
+            entry["caption"] = caption_lines
+        else:
+            thumb_out = THUMBS_DIR / f"{slug}.jpg"
+            full_out = FULL_DIR / f"{slug}.jpg"
+            kind = "texte (image)" if is_text_card else "œuvre"
+            print(f"→ [{kind}] {f.name}  =>  {slug}")
+            process_image(f, thumb_out, THUMB_MAX_DIM, watermark=not is_text_card)
+            process_image(f, full_out, FULL_MAX_DIM, watermark=not is_text_card)
+            entry["thumb"] = f"images/thumbs/{slug}.jpg"
+            entry["full"] = f"images/full/{slug}.jpg"
+
+        entries.append(entry)
 
     entries.sort(key=lambda e: e["order"])
 
@@ -284,9 +315,11 @@ def main():
         g["items"].append(e)
 
     MANIFEST_PATH.write_text(json.dumps(groups, ensure_ascii=False, indent=2))
+    n_captions = sum(1 for e in entries if e["type"] == "text" and "caption" in e)
+    n_text_images = sum(1 for e in entries if e["type"] == "text" and "caption" not in e)
     print(f"\n{len(entries)} éléments exportés ({sum(1 for e in entries if e['type']=='artwork')} œuvres, "
-          f"{sum(1 for e in entries if e['type']=='text')} cartons de texte) en {len(groups)} groupes. "
-          f"Manifest : {MANIFEST_PATH}")
+          f"{n_captions} légendes texte extraites par OCR, {n_text_images} cartons restés en image) "
+          f"en {len(groups)} groupes. Manifest : {MANIFEST_PATH}")
 
 
 if __name__ == "__main__":

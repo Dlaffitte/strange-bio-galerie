@@ -31,13 +31,26 @@
     "group": 2,
     "items": [
       {
-        "id": "note-d-intention-2",
-        "title": "Note d'intention 2",
+        "id": "avec-bonbobiol",
+        "title": "AVEC BONBOBIOL,",
         "order": 2,
         "group": 2,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-2.jpg",
-        "full": "images/full/note-d-intention-2.jpg"
+        "caption": [
+          "AVEC BONBOBIOL,",
+          "ROULEZ AU CARBURANT VERT",
+          "LE MINISTERE DU PLANT VEUT FLUIDIFIER LE TRAFIC",
+          "L'ABANDON PROGRAMMÉ DES VÉHICULES ÉLECTRIQUES",
+          "FAVORISERA LA TRANSITION VERS DE NOUVELLES MOBILITÉS DOUCES",
+          "LA GÉNÉRALISATION DES VÉHICULES À VAPEURS",
+          "PRODUITES PAR LA COMBUSTION DU MÉTHANE DE CHANVRE,",
+          "OÙ PROPULSÉS AU GAZ THC LIQUÉFIÉ,",
+          "SERA ASSORTI DE NOUVELLES MESURES",
+          "COMME LA LIMITATION DE LA VITESSE,",
+          "LA FERMETURE PROGRESSIVE DES AUTOROUTES",
+          "ET L'ADOPTION D'UN RÉSEAU ROUTIER SINUSOIDAL,",
+          "CHAMPÊTRE ET ARBORÉ"
+        ]
       },
       {
         "id": "bonbobiol",
@@ -54,22 +67,26 @@
     "group": 3,
     "items": [
       {
-        "id": "note-d-intention-3",
-        "title": "Note d'intention 3",
+        "id": "bonbobiohazard",
+        "title": "BONBOBIOHAZARD,",
         "order": 4,
         "group": 3,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-3.jpg",
-        "full": "images/full/note-d-intention-3.jpg"
+        "caption": [
+          "BONBOBIOHAZARD,",
+          "L'ATOME DE CHÈVRE",
+          "PPROMOUVOIR UN MODÈLE ÉNERGÉTIQUE VERTUEUX",
+          "GRÂCE AU NUCLÉAIRE BIOLOGIQUE"
+        ]
       },
       {
-        "id": "bonbobiohazard",
-        "title": "Bonbobiohazard",
+        "id": "bonbobiohazard-2",
+        "title": "Bonbobiohazard (variante 2)",
         "order": 5,
         "group": 3,
         "type": "artwork",
-        "thumb": "images/thumbs/bonbobiohazard.jpg",
-        "full": "images/full/bonbobiohazard.jpg"
+        "thumb": "images/thumbs/bonbobiohazard-2.jpg",
+        "full": "images/full/bonbobiohazard-2.jpg"
       },
       {
         "id": "bonbobiohazard-1",
@@ -86,13 +103,17 @@
     "group": 4,
     "items": [
       {
-        "id": "note-d-intention-4",
-        "title": "Note d'intention 4",
+        "id": "la-bombe-au-b10",
+        "title": "LA BOMBE AU B10",
         "order": 7,
         "group": 4,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-4.jpg",
-        "full": "images/full/note-d-intention-4.jpg"
+        "caption": [
+          "LA BOMBE AU B10",
+          "L'ARME 100% BIOLOGIQUE AU BONBOBIOM ENRICHI",
+          "LE PROFESSEUR ROMANESCHKO LORS DES PREMIERS ESSAIS",
+          "DE FUSION MOLÉCULAIRE DE LA BOMBE AU BROCOLY,"
+        ]
       },
       {
         "id": "bonbobiom",
@@ -109,22 +130,26 @@
     "group": 5,
     "items": [
       {
-        "id": "note-d-intention-5",
-        "title": "Note d'intention 5",
+        "id": "air-frais",
+        "title": "AIR FRAIS",
         "order": 9,
         "group": 5,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-5.jpg",
-        "full": "images/full/note-d-intention-5.jpg"
+        "caption": [
+          "AIR FRAIS",
+          "LA COMPAGNIE AÉRIENNE DÉPOLLUANTE",
+          "PLAN DE SOUTIEN À L'INDUSTRIE AÉRONAUTIQUE",
+          "CONVERTIE À L'ÉPANDAGE DE PRODUITS PHYTOSANITAIRES"
+        ]
       },
       {
-        "id": "air-frais",
-        "title": "Air Frais",
+        "id": "air-frais-2",
+        "title": "Air Frais (variante 2)",
         "order": 10,
         "group": 5,
         "type": "artwork",
-        "thumb": "images/thumbs/air-frais.jpg",
-        "full": "images/full/air-frais.jpg"
+        "thumb": "images/thumbs/air-frais-2.jpg",
+        "full": "images/full/air-frais-2.jpg"
       }
     ]
   },
@@ -132,13 +157,19 @@
     "group": 6,
     "items": [
       {
-        "id": "note-d-intention-6",
-        "title": "Note d'intention 6",
+        "id": "le-ministere-du-plant",
+        "title": "LE MINISTÈRE DU PLANT",
         "order": 11,
         "group": 6,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-6.jpg",
-        "full": "images/full/note-d-intention-6.jpg"
+        "caption": [
+          "LE MINISTÈRE DU PLANT",
+          "SOUTIENT LA PRODUCTION AGRICOLE",
+          "BoNBoB10, L'INTERNATIONALE MARAICHÈRE",
+          "POUR LA GRANDE RÉVOLUTION DES JARDINS,",
+          "ÉCOLOGIE INTENSIVE ET INDUSTRIELLE",
+          "ÉCOLOGIE EXTENSIVE PRODUCTIVISTE, MÊME COMBAT"
+        ]
       },
       {
         "id": "karachobio",
@@ -150,13 +181,13 @@
         "full": "images/full/karachobio.jpg"
       },
       {
-        "id": "note-d-intention-6-2",
-        "title": "Note d'intention 6 (suite)",
+        "id": "note-d-intention-6",
+        "title": "Note d'intention 6",
         "order": 13,
         "group": 6,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-6-2.jpg",
-        "full": "images/full/note-d-intention-6-2.jpg"
+        "thumb": "images/thumbs/note-d-intention-6.jpg",
+        "full": "images/full/note-d-intention-6.jpg"
       }
     ]
   },
@@ -164,13 +195,20 @@
     "group": 7,
     "items": [
       {
-        "id": "note-d-intention-7",
-        "title": "Note d'intention 7",
+        "id": "bonbobiomasse",
+        "title": "BONBOBIOMASSE",
         "order": 14,
         "group": 7,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-7.jpg",
-        "full": "images/full/note-d-intention-7.jpg"
+        "caption": [
+          "BONBOBIOMASSE",
+          "LE MINISTÈRE DU PLANT ENCOURAGE LA PRODUCTION INDUSTRIELLE",
+          "DE NOUVELLES SOLUTIONS ÉCOLOGIQUES",
+          "BIOCOMPATIBLES,",
+          "SOLUBLES DANS LE GREENWASHING COMPOSTABLE,",
+          "APRÈS TRAITEMENT, LES REJETS DES USINES SOUMISES AUX NORMES LES PLUS RÉCENTES",
+          "PRÉSENTENT UN TAUX DE CHLOROPHYLLE PROCHE DE 60%"
+        ]
       },
       {
         "id": "l-usine-verte",
@@ -187,13 +225,20 @@
     "group": 8,
     "items": [
       {
-        "id": "note-d-intention-8",
-        "title": "Note d'intention 8",
+        "id": "bo-nb0o-biyo",
+        "title": "BO NB0O BIYO",
         "order": 16,
         "group": 8,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-8.jpg",
-        "full": "images/full/note-d-intention-8.jpg"
+        "caption": [
+          "BO NB0O BIYO",
+          "LES BONBOBIONG AIDENT L'AFRIQUE VERTE !",
+          "ÎL CONVIENT D'ADAPTER",
+          "LES MODÈLES DE PRODUCTION DES PAYS PARTENAIRES",
+          "À L'EXPLOITATION BIO DE LEURS RESSOURCES NATURELLES,",
+          "EN VUE D'HARMONISER LES CRITÈRES DE QUALITÉ",
+          "DES PRODUITS DESTINÉS À L'EXPORTATION,"
+        ]
       },
       {
         "id": "bo-nbobiyo",
@@ -210,13 +255,16 @@
     "group": 9,
     "items": [
       {
-        "id": "note-d-intention-9",
-        "title": "Note d'intention 9",
+        "id": "lfbon-et-bobillot-megoc-ants",
+        "title": "LFBON ET BOBILLOT. MÉGOC/ANTS",
         "order": 18,
         "group": 9,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-9.jpg",
-        "full": "images/full/note-d-intention-9.jpg"
+        "caption": [
+          "LFBON ET BOBILLOT. MÉGOC/ANTS",
+          "DU ROUGE DANS LE VERT",
+          "LA RÉVOLUTION BIODYNAMIQUE ARMÉE DANS L'INDUSTRIE VIMCOLE,"
+        ]
       },
       {
         "id": "lebon-bobillot",
@@ -233,13 +281,16 @@
     "group": 10,
     "items": [
       {
-        "id": "note-d-intention-10",
-        "title": "Note d'intention 10",
+        "id": "strange-b10",
+        "title": "STRANGE B10",
         "order": 20,
         "group": 10,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-10.jpg",
-        "full": "images/full/note-d-intention-10.jpg"
+        "caption": [
+          "STRANGE B10",
+          "LES SUPER HÉROS DE BONBOBIOMIX",
+          "COMBATTENT LA MALBOUFFE"
+        ]
       },
       {
         "id": "strange-bio-vegan-battle",
@@ -256,13 +307,16 @@
     "group": 11,
     "items": [
       {
-        "id": "note-d-intention-11",
-        "title": "Note d'intention 11",
+        "id": "sport-et-dopage-naturel",
+        "title": "SPORT ET DOPAGE NATUREL",
         "order": 22,
         "group": 11,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-11.jpg",
-        "full": "images/full/note-d-intention-11.jpg"
+        "caption": [
+          "SPORT ET DOPAGE NATUREL",
+          "SURVEILLANCE ET CADRAGE DES PERFORMANCES GRÂCE AUX SUBSTANCES BI0OGM",
+          "PROMOTION DÜ PERMACULTURISME"
+        ]
       },
       {
         "id": "schtrulk",
@@ -302,13 +356,19 @@
     "group": 13,
     "items": [
       {
-        "id": "note-d-intention-13",
-        "title": "Note d'intention 13",
+        "id": "pin-de-vie-et-retour-a-la-terre-bio",
+        "title": "PIN DE VIE ET RETOUR À LA TERRE BIO,",
         "order": 26,
         "group": 13,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-13.jpg",
-        "full": "images/full/note-d-intention-13.jpg"
+        "caption": [
+          "PIN DE VIE ET RETOUR À LA TERRE BIO,",
+          "FAVORISER ET GÉNÉRALISER",
+          "L'USAGE D'ENGRAIS NATURELS",
+          "EN TRANSFORMANT NOS CIMETIÈRES",
+          "EN JARDINS PARTAGÉS",
+          "ET POTAGERS SOLIDAIRES,"
+        ]
       },
       {
         "id": "marcel-bobobio-fils",
@@ -325,13 +385,19 @@
     "group": 14,
     "items": [
       {
-        "id": "note-d-intention-14",
-        "title": "Note d'intention 14",
+        "id": "en-lutte-sur-la-butte",
+        "title": "EN LUTTE SUR LA BUTTE !",
         "order": 28,
         "group": 14,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-14.jpg",
-        "full": "images/full/note-d-intention-14.jpg"
+        "caption": [
+          "EN LUTTE SUR LA BUTTE !",
+          "CONTRE LES VIOLENCES FAITES AUX FLEURS",
+          "LE MOUVEMENT ME TOUFFE,",
+          "GREEN LEAVES Marrer, No NATURE,",
+          "LES PÉTALES GUEULENT …,",
+          "C'EST LE BOUQUET FINAL!"
+        ]
       },
       {
         "id": "metoof",
@@ -357,13 +423,18 @@
     "group": 15,
     "items": [
       {
-        "id": "note-d-intention-15",
-        "title": "Note d'intention 15",
+        "id": "l-ultime-testament",
+        "title": "L'ULTIME TESTAMENT",
         "order": 31,
         "group": 15,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-15.jpg",
-        "full": "images/full/note-d-intention-15.jpg"
+        "caption": [
+          "L'ULTIME TESTAMENT",
+          "ET LES GRANDS RÉCITS BIOBLIQUES",
+          "PRIÈRE DE BIEN VOULOIR SAUVER LE MONDE",
+          "ICI, LA RECRÉATION DE L'UNIVERS,",
+          "D'APRÈS LES ÉVANGILES SELON SAINTE ÉTHIQUE"
+        ]
       },
       {
         "id": "plan-b",
@@ -398,13 +469,19 @@
     "group": 16,
     "items": [
       {
-        "id": "note-d-intention-16",
-        "title": "Note d'intention 16",
+        "id": "grande-litterature",
+        "title": "GRANDE LITTÉRATURE",
         "order": 35,
         "group": 16,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-16.jpg",
-        "full": "images/full/note-d-intention-16.jpg"
+        "caption": [
+          "GRANDE LITTÉRATURE",
+          "« LES AVENTURES DU CAPITAINE GREEN. »",
+          "CE RÉCIT ÉPIQUE, DE JULES VERT",
+          "RETRACE LES GRANDES HEURES",
+          "DE LA BATAILLE CONTRE L'ÉROSION",
+          "DES RESSOURCES PLANÉTAIRES"
+        ]
       },
       {
         "id": "captain-green",
@@ -421,13 +498,20 @@
     "group": 17,
     "items": [
       {
-        "id": "note-d-intention-17",
-        "title": "Note d'intention 17",
+        "id": "vie-culturelle-et-plein-air",
+        "title": "VIE CULTURELLE ET PLEIN AIR",
         "order": 37,
         "group": 17,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-17.jpg",
-        "full": "images/full/note-d-intention-17.jpg"
+        "caption": [
+          "VIE CULTURELLE ET PLEIN AIR",
+          "UN EFFORT PARTICULIER",
+          "EST DEMANDÉ AU SPECTACLE SUR SOL VIVANT",
+          "NOS EFFORTS NE SAURAIENT ÊTRE INTERMITTENTS!",
+          "LA COMPAGNIE DE THÉÂTRE BONBOBIORICK",
+          "REVISITE SHAKESPEARE",
+          "APRÈS LE SUCCÈS DE BIOTHELLO, HAMLET VÉGAN"
+        ]
       },
       {
         "id": "hamlet-vegan-2",
@@ -444,13 +528,19 @@
     "group": 18,
     "items": [
       {
-        "id": "note-d-intention-18",
-        "title": "Note d'intention 18",
+        "id": "le-petit-chaperon-b10",
+        "title": "LE PETIT CHAPERON B10",
         "order": 39,
         "group": 18,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-18.jpg",
-        "full": "images/full/note-d-intention-18.jpg"
+        "caption": [
+          "LE PETIT CHAPERON B10",
+          "LITTÉRATURE ENFANTINE,",
+          "ADAPTATION DES CONTES ANCIENS",
+          "ET LÉGENDES TRADITIONNELLES",
+          "POUR FAMILIARISER LES PLUS JEUNES",
+          "À LEUR NOUVEL ENVIRONNEMENT"
+        ]
       },
       {
         "id": "le-petit-chaperon-bio-2",
@@ -467,13 +557,22 @@
     "group": 19,
     "items": [
       {
-        "id": "note-d-intention-19",
-        "title": "Note d'intention 19",
+        "id": "bonbobiof-gadget",
+        "title": "BonBOBIOF GADGET",
         "order": 41,
         "group": 19,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-19.jpg",
-        "full": "images/full/note-d-intention-19.jpg"
+        "caption": [
+          "BonBOBIOF GADGET",
+          "LES PARUTIONS JEUNESSE",
+          "ET LA PRESSE JEUNE PUBLIC",
+          "AURONT POUR MISSION",
+          "DE FAVORISER LA COMPRÉHENSION",
+          "DES ENJEUX ET PROBLÉMATIQUES",
+          "DE NOTRE TEMPS,",
+          "À TRAVERS UNE APPROCHE LUDIQUE ET JOYEUSE",
+          "COMPRÉHENSIBLE PAR LES NOUVELLES GÉNÉRATIONS"
+        ]
       },
       {
         "id": "bonbobiof",
@@ -485,13 +584,16 @@
         "full": "images/full/bonbobiof.jpg"
       },
       {
-        "id": "note-d-intention-19-2",
-        "title": "Note d'intention 19 (suite)",
+        "id": "le-cinema-du-giec",
+        "title": "LE CINÉMA DU GIEC",
         "order": 43,
         "group": 19,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-19-2.jpg",
-        "full": "images/full/note-d-intention-19-2.jpg"
+        "caption": [
+          "LE CINÉMA DU GIEC",
+          "LE GROUPE D'INTERVENTION ENVIRONNEMENT ET CINÉMA",
+          "PROPOSE LA FINE FLEUR DES FILMS DE SÉRIE BIO"
+        ]
       }
     ]
   },
@@ -499,13 +601,23 @@
     "group": 20,
     "items": [
       {
-        "id": "note-d-intention-20",
-        "title": "Note d'intention 20",
+        "id": "the-bonbobiones",
+        "title": "THE BONBOBIONES",
         "order": 44,
         "group": 20,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-20.jpg",
-        "full": "images/full/note-d-intention-20.jpg"
+        "caption": [
+          "THE BONBOBIONES",
+          "PAINT ÎT GREEN !",
+          "POUR LA BIODIVERSITÉ DANS L'INDUSTRIE MUSICALE,",
+          "LE LABEL DES CHAMPS ŒUVRE POUR",
+          "L'ASSAINISSEMENT DE L'AIR DE VARIÉTÉ",
+          "ET LA VALORISATION DE LA MUSIQUE VERTE",
+          "LE PUNK RECYCLABLE,",
+          "LE Rock CABBAGE,",
+          "LE VEGG/E MÉTAL,",
+          "LE GLUTEN FREE JAZZ"
+        ]
       },
       {
         "id": "bonbobiones",
@@ -522,13 +634,18 @@
     "group": 21,
     "items": [
       {
-        "id": "note-d-intention-21",
-        "title": "Note d'intention 21",
+        "id": "le-cinema-du-giec-2",
+        "title": "LE CINÉMA DU GIEC (suite)",
         "order": 46,
         "group": 21,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-21.jpg",
-        "full": "images/full/note-d-intention-21.jpg"
+        "caption": [
+          "LE CINÉMA DU GIEC",
+          "LE GROUPE D'INTERVENTION ENVIRONNEMENT ET CINÉMA",
+          "PROPOSE LA FINE FLEUR DES FILMS DE SÉRIE BIO",
+          "GUEULE DE Bois",
+          "ÜN REMAKE DE LA NUIT DES ZOMBIO"
+        ]
       },
       {
         "id": "gueule-de-bois",
@@ -545,13 +662,17 @@
     "group": 22,
     "items": [
       {
-        "id": "note-d-intention-22",
-        "title": "Note d'intention 22",
+        "id": "envie-de-germer",
+        "title": "ENVIE DE GERMER",
         "order": 48,
         "group": 22,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-22.jpg",
-        "full": "images/full/note-d-intention-22.jpg"
+        "caption": [
+          "ENVIE DE GERMER",
+          "UNE FABLE URBAINE",
+          "HORREUR ENVIRONNEMENTALE",
+          "ET ÉPOUVANTE ÉCOLOGIQUE"
+        ]
       },
       {
         "id": "envie-de-germer-2",
@@ -563,13 +684,13 @@
         "full": "images/full/envie-de-germer-2.jpg"
       },
       {
-        "id": "envie-de-germer",
-        "title": "Envie De Germer",
+        "id": "envie-de-germer-2",
+        "title": "Envie De Germer (variante 2)",
         "order": 50,
         "group": 22,
         "type": "artwork",
-        "thumb": "images/thumbs/envie-de-germer.jpg",
-        "full": "images/full/envie-de-germer.jpg"
+        "thumb": "images/thumbs/envie-de-germer-2.jpg",
+        "full": "images/full/envie-de-germer-2.jpg"
       }
     ]
   },
@@ -577,13 +698,18 @@
     "group": 23,
     "items": [
       {
-        "id": "note-d-intention-23",
-        "title": "Note d'intention 23",
+        "id": "nouveau-carton-au-biox-office",
+        "title": "NOUVEAU CARTON AU BIOX OFFICE:",
         "order": 51,
         "group": 23,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-23.jpg",
-        "full": "images/full/note-d-intention-23.jpg"
+        "caption": [
+          "NOUVEAU CARTON AU BIOX OFFICE:",
+          "LES FILMS D'ACTION CLIMATIQUE",
+          "RAMB10",
+          "AMAZONIE, FORÊT VERTE",
+          "CETTE FOIS-CI, ELLE LUTTE POUR SA SURVIE !"
+        ]
       },
       {
         "id": "rambio",
@@ -600,13 +726,19 @@
     "group": 24,
     "items": [
       {
-        "id": "note-d-intention-24",
-        "title": "Note d'intention 24",
+        "id": "programme-spatial-ecoresponsable",
+        "title": "PROGRAMME SPATIAL ECORESPONSABLE",
         "order": 53,
         "group": 24,
         "type": "text",
-        "thumb": "images/thumbs/note-d-intention-24.jpg",
-        "full": "images/full/note-d-intention-24.jpg"
+        "caption": [
+          "PROGRAMME SPATIAL ECORESPONSABLE",
+          "«LES CHAMPS DE MARS»,",
+          "UNE EXPÉDITION INTERNATIONALE DE RECHERCHE,",
+          "EN VUE DE LA RELOCALISATION ET L'IMPLANTATION",
+          "DE L'ÊTRE HUMAIN",
+          "SUR UNE PLANÈTE CERTIFIÉE ZÉRO DÉCHET"
+        ]
       },
       {
         "id": "les-champs-de-mars-2",

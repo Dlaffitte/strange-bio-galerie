@@ -203,6 +203,37 @@ html, body {
   opacity: 0.5;
 }
 
+/* Légende textuelle (carton OCRisé) : typographie éditoriale, plutôt qu'image */
+.caption-block {
+  width: 100%;
+  max-width: 560px;
+  text-align: center;
+  padding: 4px 12px;
+}
+
+.caption-kicker {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--accent-light);
+  margin: 0 0 12px;
+  letter-spacing: 0.01em;
+}
+
+.caption-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.caption-body p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
 /* Cartons de texte : rendus comme un feuillet clair, plus petit, au-dessus */
 .work-texts {
   display: flex;

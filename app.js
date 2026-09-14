@@ -31,9 +31,6 @@
     var frag = document.createDocumentFragment();
 
     groups.forEach(function (group, groupIdx) {
-      var textItems = group.items.filter(function (i) { return i.type === "text"; });
-      var artworkItems = group.items.filter(function (i) { return i.type === "artwork"; });
-
       var section = document.createElement("section");
       section.className = "work";
 
@@ -43,81 +40,82 @@
       indexLabel.textContent = "Pièce " + (num < 10 ? "0" + num : num);
       section.appendChild(indexLabel);
 
-      if (textItems.length) {
-        var textsWrap = document.createElement("div");
-        textsWrap.className = "work-texts";
-        textItems.forEach(function (item) {
-          var flatIdx = flatItems.length;
-          flatItems.push(item);
+      // Les éléments d'un groupe sont déjà dans l'ordre naturel du diaporama :
+      // on les rend tels quels, afin que la légende apparaisse avant ou après
+      // l'illustration selon sa position d'origine (au lieu de toujours forcer
+      // le texte au-dessus).
+      group.items.forEach(function (item) {
+        if (item.type === "text" && item.caption) {
+          section.appendChild(buildCaptionBlock(item));
+          return;
+        }
 
-          var card = document.createElement("div");
-          card.className = "text-card";
-          card.setAttribute("tabindex", "0");
-          card.setAttribute("role", "button");
-          card.setAttribute("aria-label", item.title + " (ouvrir l'aperçu)");
+        var flatIdx = flatItems.length;
+        flatItems.push(item);
 
-          var img = document.createElement("img");
-          img.src = item.thumb;
-          img.alt = item.title;
-          img.loading = "lazy";
-          img.draggable = false;
+        var isArtwork = item.type === "artwork";
+        var card = document.createElement("div");
+        card.className = isArtwork ? "artwork-card" : "text-card";
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", item.title + " (ouvrir l'aperçu)");
 
-          card.appendChild(img);
-          card.addEventListener("click", function () { openLightbox(flatIdx); });
-          card.addEventListener("keydown", function (e) {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              openLightbox(flatIdx);
-            }
-          });
+        var img = document.createElement("img");
+        img.src = item.thumb;
+        img.alt = item.title;
+        img.loading = "lazy";
+        img.draggable = false;
 
-          textsWrap.appendChild(card);
+        card.appendChild(img);
+        card.addEventListener("click", function () { openLightbox(flatIdx); });
+        card.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openLightbox(flatIdx);
+          }
         });
-        section.appendChild(textsWrap);
-      }
 
-      if (artworkItems.length) {
-        var artsWrap = document.createElement("div");
-        artsWrap.className = "work-artworks";
-        artworkItems.forEach(function (item) {
-          var flatIdx = flatItems.length;
-          flatItems.push(item);
+        var wrap = document.createElement("div");
+        wrap.className = isArtwork ? "work-artworks" : "work-texts";
+        wrap.appendChild(card);
+        section.appendChild(wrap);
 
-          var card = document.createElement("div");
-          card.className = "artwork-card";
-          card.setAttribute("tabindex", "0");
-          card.setAttribute("role", "button");
-          card.setAttribute("aria-label", item.title + " (ouvrir l'aperçu)");
-
-          var img = document.createElement("img");
-          img.src = item.thumb;
-          img.alt = item.title;
-          img.loading = "lazy";
-          img.draggable = false;
-
-          card.appendChild(img);
-          card.addEventListener("click", function () { openLightbox(flatIdx); });
-          card.addEventListener("keydown", function (e) {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              openLightbox(flatIdx);
-            }
-          });
-
-          artsWrap.appendChild(card);
-        });
-        section.appendChild(artsWrap);
-
-        var caption = document.createElement("div");
-        caption.className = "work-caption";
-        caption.textContent = artworkItems.map(function (i) { return i.title; }).join(" · ");
-        section.appendChild(caption);
-      }
+        if (isArtwork) {
+          var caption = document.createElement("div");
+          caption.className = "work-caption";
+          caption.textContent = item.title;
+          section.appendChild(caption);
+        }
+      });
 
       frag.appendChild(section);
     });
 
     gallery.appendChild(frag);
+  }
+
+  function buildCaptionBlock(item) {
+    var block = document.createElement("div");
+    block.className = "caption-block";
+
+    var lines = item.caption.slice();
+    var kicker = document.createElement("p");
+    kicker.className = "caption-kicker";
+    kicker.textContent = lines.shift();
+    block.appendChild(kicker);
+
+    if (lines.length) {
+      var body = document.createElement("div");
+      body.className = "caption-body";
+      lines.forEach(function (line) {
+        var p = document.createElement("p");
+        p.textContent = line;
+        body.appendChild(p);
+      });
+      block.appendChild(body);
+    }
+
+    return block;
   }
 
   function openLightbox(idx) {
