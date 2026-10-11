@@ -176,17 +176,6 @@ def process_image(src_path: Path, out_path: Path, max_dim: int, watermark: bool)
         rgba = img.convert("RGBA")
         wm = make_watermark_layer(rgba.size, color=wm_color)
         combined = Image.alpha_composite(rgba, wm).convert("RGB")
-
-        # ajoute une mention de copyright discrète en bas d'image, plus lisible
-        draw = ImageDraw.Draw(combined)
-        font = load_font(max(14, combined.size[0] // 45))
-        label = "\u00a9 Bonbobio — aperçu non contractuel"
-        tw = draw.textlength(label, font=font)
-        pad = 10
-        x = combined.size[0] - tw - pad * 2
-        y = combined.size[1] - font.size - pad * 2
-        draw.rectangle([x, y, combined.size[0], combined.size[1]], fill=(0, 0, 0, 160))
-        draw.text((x + pad, y + pad // 2), label, font=font, fill=(255, 255, 255, 230))
     else:
         combined = img
 
