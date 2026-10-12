@@ -42,7 +42,7 @@
       var groupArtworks = group.items.filter(function (i) { return i.type === "artwork"; });
       indexLabel.textContent = groupArtworks.length
         ? groupArtworks.filter(function (i) { return !i.hide_title; }).map(function (i) { return i.title; }).join(" · ")
-        : "Note d'intention";
+        : "Le communiqué du Ministère du Plant";
       section.appendChild(indexLabel);
 
       // Toutes les illustrations du groupe d'abord, puis toutes les
