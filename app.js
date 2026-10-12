@@ -32,6 +32,7 @@
 
     var frag = document.createDocumentFragment();
 
+    var artworkNumber = 0;
     groups.forEach(function (group, groupIdx) {
       var section = document.createElement("section");
       section.className = "work";
@@ -72,6 +73,13 @@
         img.draggable = false;
 
         card.appendChild(img);
+        if (isArtwork) {
+          artworkNumber += 1;
+          var badge = document.createElement("span");
+          badge.className = "artwork-number";
+          badge.textContent = artworkNumber;
+          card.appendChild(badge);
+        }
         card.addEventListener("click", function () { openLightbox(flatIdx); });
         card.addEventListener("keydown", function (e) {
           if (e.key === "Enter" || e.key === " ") {

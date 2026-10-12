@@ -329,6 +329,29 @@ html, body {
   user-drag: none;
 }
 
+.artwork-number {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  z-index: 2;
+}
+
 .artwork-card:hover img {
   transform: scale(1.03);
 }
