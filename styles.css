@@ -242,6 +242,17 @@ html, body {
   color: var(--text-muted);
 }
 
+.caption-block .caption-tagline {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin: 10px 0;
+}
+
 .caption-body {
   display: flex;
   flex-direction: column;

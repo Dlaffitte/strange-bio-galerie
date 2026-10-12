@@ -99,6 +99,14 @@
     gallery.appendChild(frag);
   }
 
+  // Une ligne préfixée par "§" est un slogan d'affiche de cinéma.
+  function markTagline(p) {
+    if (p.textContent.charAt(0) === "§") {
+      p.textContent = p.textContent.slice(1);
+      p.classList.add("caption-tagline");
+    }
+  }
+
   function buildCaptionBlock(item) {
     var block = document.createElement("div");
     block.className = "caption-block";
@@ -107,6 +115,7 @@
     var kicker = document.createElement("p");
     kicker.className = "caption-kicker";
     kicker.textContent = lines.shift();
+    markTagline(kicker);
     block.appendChild(kicker);
 
     if (lines.length) {
@@ -115,6 +124,7 @@
       lines.forEach(function (line) {
         var p = document.createElement("p");
         p.textContent = line;
+        markTagline(p);
         body.appendChild(p);
       });
       block.appendChild(body);

@@ -360,7 +360,7 @@
       },
       {
         "id": "metoof-2",
-        "title": "Metoof 2",
+        "title": "Metoof",
         "order": 28,
         "group": 14,
         "type": "artwork",
@@ -587,7 +587,7 @@
         "type": "text",
         "caption": [
           "Nouveau carton au biox office :",
-          "Cette fois-ci, elle lutte pour sa survie !",
+          "§Cette fois-ci, elle lutte pour sa survie !",
           "Les films d'Action Climatique.",
           "Rambio.",
           "Amazonie, Forêt Verte..."
