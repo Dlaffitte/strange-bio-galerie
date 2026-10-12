@@ -271,6 +271,8 @@ def main():
             if group_num not in captioned_groups:
                 captioned_groups.add(group_num)
                 lines = CAPTIONS[str(group_num)]
+                if not lines:
+                    continue
                 print(f"→ [légende fournie] groupe {group_num}  =>  {lines[0]}")
                 entries.append({
                     "id": f"legende-{group_num}",
