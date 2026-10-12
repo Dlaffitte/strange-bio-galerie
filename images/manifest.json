@@ -391,18 +391,9 @@
         ]
       },
       {
-        "id": "metoof",
-        "title": "Metoof",
-        "order": 28,
-        "group": 14,
-        "type": "artwork",
-        "thumb": "images/thumbs/metoof.jpg",
-        "full": "images/full/metoof.jpg"
-      },
-      {
         "id": "metoof-2",
         "title": "Metoof 2",
-        "order": 29,
+        "order": 28,
         "group": 14,
         "type": "artwork",
         "thumb": "images/thumbs/metoof-2.jpg",
@@ -416,7 +407,7 @@
       {
         "id": "l-ultime-testament",
         "title": "L'ULTIME TESTAMENT",
-        "order": 30,
+        "order": 29,
         "group": 15,
         "type": "text",
         "caption": [
@@ -430,25 +421,16 @@
       {
         "id": "plan-b",
         "title": "Plan B",
-        "order": 31,
+        "order": 30,
         "group": 15,
         "type": "artwork",
         "thumb": "images/thumbs/plan-b.jpg",
         "full": "images/full/plan-b.jpg"
       },
       {
-        "id": "plan-b-2",
-        "title": "Plan B (variante 2)",
-        "order": 32,
-        "group": 15,
-        "type": "artwork",
-        "thumb": "images/thumbs/plan-b-2.jpg",
-        "full": "images/full/plan-b-2.jpg"
-      },
-      {
         "id": "petanque",
         "title": "Petanque",
-        "order": 33,
+        "order": 31,
         "group": 15,
         "type": "artwork",
         "thumb": "images/thumbs/petanque.jpg",
@@ -462,7 +444,7 @@
       {
         "id": "grande-litterature",
         "title": "GRANDE LITTÉRATURE",
-        "order": 34,
+        "order": 32,
         "group": 16,
         "type": "text",
         "caption": [
@@ -477,7 +459,7 @@
       {
         "id": "captain-green",
         "title": "Captain Green",
-        "order": 35,
+        "order": 33,
         "group": 16,
         "type": "artwork",
         "thumb": "images/thumbs/captain-green.jpg",
@@ -491,7 +473,7 @@
       {
         "id": "vie-culturelle-et-plein-air",
         "title": "VIE CULTURELLE ET PLEIN AIR",
-        "order": 36,
+        "order": 34,
         "group": 17,
         "type": "text",
         "caption": [
@@ -507,7 +489,7 @@
       {
         "id": "hamlet-vegan-2",
         "title": "Hamlet Vegan 2",
-        "order": 37,
+        "order": 35,
         "group": 17,
         "type": "artwork",
         "thumb": "images/thumbs/hamlet-vegan-2.jpg",
@@ -521,7 +503,7 @@
       {
         "id": "le-petit-chaperon-b10",
         "title": "LE PETIT CHAPERON B10",
-        "order": 38,
+        "order": 36,
         "group": 18,
         "type": "text",
         "caption": [
@@ -536,7 +518,7 @@
       {
         "id": "le-petit-chaperon-bio-2",
         "title": "Le Petit Chaperon Bio 2",
-        "order": 39,
+        "order": 37,
         "group": 18,
         "type": "artwork",
         "thumb": "images/thumbs/le-petit-chaperon-bio-2.jpg",
@@ -550,7 +532,7 @@
       {
         "id": "bonbobiof-gadget",
         "title": "BonBOBIOF GADGET",
-        "order": 40,
+        "order": 38,
         "group": 19,
         "type": "text",
         "caption": [
@@ -568,7 +550,7 @@
       {
         "id": "bonbobiof",
         "title": "Bonbobiof",
-        "order": 41,
+        "order": 39,
         "group": 19,
         "type": "artwork",
         "thumb": "images/thumbs/bonbobiof.jpg",
@@ -577,7 +559,7 @@
       {
         "id": "le-cinema-du-giec",
         "title": "LE CINÉMA DU GIEC",
-        "order": 42,
+        "order": 40,
         "group": 19,
         "type": "text",
         "caption": [
@@ -594,7 +576,7 @@
       {
         "id": "the-bonbobiones",
         "title": "THE BONBOBIONES",
-        "order": 43,
+        "order": 41,
         "group": 20,
         "type": "text",
         "caption": [
@@ -613,7 +595,7 @@
       {
         "id": "bonbobiones",
         "title": "Bonbobiones",
-        "order": 44,
+        "order": 42,
         "group": 20,
         "type": "artwork",
         "thumb": "images/thumbs/bonbobiones.jpg",
@@ -627,7 +609,7 @@
       {
         "id": "le-cinema-du-giec-2",
         "title": "LE CINÉMA DU GIEC (suite)",
-        "order": 45,
+        "order": 43,
         "group": 21,
         "type": "text",
         "caption": [
@@ -641,7 +623,7 @@
       {
         "id": "gueule-de-bois",
         "title": "Gueule De Bois",
-        "order": 46,
+        "order": 44,
         "group": 21,
         "type": "artwork",
         "thumb": "images/thumbs/gueule-de-bois.jpg",
@@ -655,7 +637,7 @@
       {
         "id": "envie-de-germer",
         "title": "ENVIE DE GERMER",
-        "order": 47,
+        "order": 45,
         "group": 22,
         "type": "text",
         "caption": [
@@ -667,17 +649,8 @@
       },
       {
         "id": "envie-de-germer-2",
-        "title": "Envie De Germer 2",
-        "order": 48,
-        "group": 22,
-        "type": "artwork",
-        "thumb": "images/thumbs/envie-de-germer-2.jpg",
-        "full": "images/full/envie-de-germer-2.jpg"
-      },
-      {
-        "id": "envie-de-germer-2",
         "title": "Envie De Germer (variante 2)",
-        "order": 49,
+        "order": 46,
         "group": 22,
         "type": "artwork",
         "thumb": "images/thumbs/envie-de-germer-2.jpg",
@@ -691,7 +664,7 @@
       {
         "id": "nouveau-carton-au-biox-office",
         "title": "NOUVEAU CARTON AU BIOX OFFICE:",
-        "order": 50,
+        "order": 47,
         "group": 23,
         "type": "text",
         "caption": [
@@ -705,7 +678,7 @@
       {
         "id": "rambio",
         "title": "Rambio",
-        "order": 51,
+        "order": 48,
         "group": 23,
         "type": "artwork",
         "thumb": "images/thumbs/rambio.jpg",
@@ -719,7 +692,7 @@
       {
         "id": "programme-spatial-ecoresponsable",
         "title": "PROGRAMME SPATIAL ECORESPONSABLE",
-        "order": 52,
+        "order": 49,
         "group": 24,
         "type": "text",
         "caption": [
@@ -734,7 +707,7 @@
       {
         "id": "les-champs-de-mars-2",
         "title": "Les Champs De Mars 2",
-        "order": 53,
+        "order": 50,
         "group": 24,
         "type": "artwork",
         "thumb": "images/thumbs/les-champs-de-mars-2.jpg",
@@ -748,7 +721,7 @@
       {
         "id": "note-d-intention-25",
         "title": "Note d'intention 25",
-        "order": 54,
+        "order": 51,
         "group": 25,
         "type": "text",
         "thumb": "images/thumbs/note-d-intention-25.jpg",
@@ -757,7 +730,7 @@
       {
         "id": "bonbobiover",
         "title": "Bonbobiover",
-        "order": 55,
+        "order": 52,
         "group": 25,
         "type": "artwork",
         "thumb": "images/thumbs/bonbobiover.jpg",
