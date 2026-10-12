@@ -166,6 +166,14 @@ html, body {
   font-weight: 600;
 }
 
+.notice-text a {
+  color: var(--accent-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
 /* Galerie */
 .main-container {
   position: relative;
