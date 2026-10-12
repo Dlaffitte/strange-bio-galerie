@@ -201,6 +201,10 @@ html, body {
   padding: 64px 0;
 }
 
+.work:first-child {
+  padding-top: 0;
+}
+
 .work + .work {
   border-top: 1px solid var(--border-subtle);
 }
