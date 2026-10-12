@@ -8,6 +8,19 @@
   "petanque": {
     "caption": [
       "Prière de bien vouloir sauver le Monde"
-    ]
+    ],
+    "hide_title": true
+  },
+  "bonbobiohazard-1": {
+    "title": "Bonbobiohazard"
+  },
+  "hamlet-vegan-2": {
+    "title": "Hamlet Vegan"
+  },
+  "le-petit-chaperon-bio-2": {
+    "title": "Le Petit Chaperon Bio"
+  },
+  "les-champs-de-mars-2": {
+    "title": "Les Champs De Mars"
   }
 }

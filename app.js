@@ -40,7 +40,7 @@
       indexLabel.className = "work-index";
       var groupArtworks = group.items.filter(function (i) { return i.type === "artwork"; });
       indexLabel.textContent = groupArtworks.length
-        ? groupArtworks.map(function (i) { return i.title; }).join(" · ")
+        ? groupArtworks.filter(function (i) { return !i.hide_title; }).map(function (i) { return i.title; }).join(" · ")
         : "Note d'intention";
       section.appendChild(indexLabel);
 

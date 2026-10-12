@@ -309,6 +309,8 @@ def main():
         ov = ARTWORK_OVERRIDES.get(slug) if not is_text_card else None
         if ov:
             entry["title"] = ov.get("title", entry["title"])
+            if ov.get("hide_title"):
+                entry["hide_title"] = True
             if ov.get("caption"):
                 entry["caption"] = ov["caption"]
 
