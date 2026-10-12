@@ -236,6 +236,11 @@ def main():
 
     entries = []
     seen_slugs = {}
+    captioned_groups = set()
+    CAPTIONS = {}
+    captions_path = SITE_DIR / "captions.json"
+    if captions_path.exists():
+        CAPTIONS = json.loads(captions_path.read_text(encoding="utf-8"))
     files = sorted(SOURCE_DIR.glob("*.jpg")) + sorted(SOURCE_DIR.glob("*.jpeg"))
     files = [f for f in files if f.name not in EXCLUDED_FILES]
 
@@ -255,6 +260,23 @@ def main():
         m = re.match(r"^(\d+)", stem)
         group_num = int(m.group(1)) if m else 999
         is_text_card = f.stat().st_size < SIZE_THRESHOLD
+
+        # Légendes fournies par l'artiste (captions.json) : elles remplacent
+        # tous les cartons de texte du groupe (OCR ou image).
+        if is_text_card and str(group_num) in CAPTIONS:
+            if group_num not in captioned_groups:
+                captioned_groups.add(group_num)
+                lines = CAPTIONS[str(group_num)]
+                print(f"→ [légende fournie] groupe {group_num}  =>  {lines[0]}")
+                entries.append({
+                    "id": f"legende-{group_num}",
+                    "title": lines[0],
+                    "order": position,
+                    "group": group_num,
+                    "type": "text",
+                    "caption": lines,
+                })
+            continue
 
         caption_lines = None
         if is_text_card:

@@ -225,34 +225,35 @@ html, body {
   opacity: 0.5;
 }
 
-/* Légende textuelle (carton OCRisé) : typographie éditoriale, plutôt qu'image */
+/* Légende sous l'image : petite police de légende, sobre */
 .caption-block {
   width: 100%;
-  max-width: 560px;
-  text-align: center;
-  padding: 4px 12px;
+  max-width: 640px;
+  text-align: left;
+  padding: 0 4px;
+  border-left: 2px solid var(--accent);
+  padding-left: 14px;
+  margin-top: -4px;
 }
 
 .caption-kicker {
-  font-family: "Playfair Display", Georgia, serif;
-  font-style: italic;
+  font-size: 0.82rem;
   font-weight: 600;
-  font-size: 1.3rem;
-  color: var(--accent-light);
-  margin: 0 0 12px;
-  letter-spacing: 0.01em;
+  line-height: 1.45;
+  color: var(--text-main);
+  margin: 0 0 4px;
 }
 
 .caption-body {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
 }
 
 .caption-body p {
   margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.78rem;
+  line-height: 1.5;
   color: var(--text-muted);
 }
 
