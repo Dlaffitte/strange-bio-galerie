@@ -43,7 +43,7 @@
       indexLabel.textContent = groupArtworks.length
         ? groupArtworks.filter(function (i) { return !i.hide_title; }).map(function (i) { return i.title; }).join(" · ")
         : "Le communiqué du Ministère du Plant";
-      section.appendChild(indexLabel);
+      if (indexLabel.textContent) section.appendChild(indexLabel);
 
       // Toutes les illustrations du groupe d'abord, puis toutes les
       // légendes (texte OCR ou carton image de secours) en dessous.

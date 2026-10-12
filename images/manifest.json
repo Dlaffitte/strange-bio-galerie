@@ -8,6 +8,7 @@
         "order": 0,
         "group": 0,
         "type": "artwork",
+        "hide_title": true,
         "thumb": "images/thumbs/bonbobio.jpg",
         "full": "images/full/bonbobio.jpg"
       }
