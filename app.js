@@ -38,8 +38,10 @@
 
       var indexLabel = document.createElement("div");
       indexLabel.className = "work-index";
-      var num = groupIdx + 1;
-      indexLabel.textContent = "Pièce " + (num < 10 ? "0" + num : num);
+      var groupArtworks = group.items.filter(function (i) { return i.type === "artwork"; });
+      indexLabel.textContent = groupArtworks.length
+        ? groupArtworks.map(function (i) { return i.title; }).join(" · ")
+        : "Note d'intention";
       section.appendChild(indexLabel);
 
       // Toutes les illustrations du groupe d'abord, puis toutes les
@@ -86,13 +88,6 @@
         wrap.className = isArtwork ? "work-artworks" : "work-texts";
         wrap.appendChild(card);
         section.appendChild(wrap);
-
-        if (isArtwork) {
-          var caption = document.createElement("div");
-          caption.className = "work-caption";
-          caption.textContent = item.title;
-          section.appendChild(caption);
-        }
       });
 
       frag.appendChild(section);
