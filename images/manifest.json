@@ -383,17 +383,18 @@
         "group": 15,
         "type": "text",
         "caption": [
-          "La Vie liturgique.",
-          "L'Ultime Testament, et les Grands Récits Biobliques.",
-          "Prière de bien vouloir sauver le Monde. Ici, la Recréation de l'Univers, d'après Les évangiles selon Sainte Éthique."
+          "La Vie liturgique."
         ]
       },
       {
         "id": "plan-b",
-        "title": "Plan B",
+        "title": "L'Ultime Testament et les Grands Récits Biobliques",
         "order": 30,
         "group": 15,
         "type": "artwork",
+        "caption": [
+          "Ici, La Recréation de l'Univers, d'après Les évangiles selon Sainte Ethique"
+        ],
         "thumb": "images/thumbs/plan-b.jpg",
         "full": "images/full/plan-b.jpg"
       },
@@ -403,6 +404,9 @@
         "order": 31,
         "group": 15,
         "type": "artwork",
+        "caption": [
+          "Prière de bien vouloir sauver le Monde"
+        ],
         "thumb": "images/thumbs/petanque.jpg",
         "full": "images/full/petanque.jpg"
       }

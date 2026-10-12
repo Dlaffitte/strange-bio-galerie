@@ -238,6 +238,10 @@ def main():
     seen_slugs = {}
     captioned_groups = set()
     CAPTIONS = {}
+    ARTWORK_OVERRIDES = {}
+    ov_path = SITE_DIR / "artworks.json"
+    if ov_path.exists():
+        ARTWORK_OVERRIDES = json.loads(ov_path.read_text(encoding="utf-8"))
     captions_path = SITE_DIR / "captions.json"
     if captions_path.exists():
         CAPTIONS = json.loads(captions_path.read_text(encoding="utf-8"))
@@ -299,6 +303,12 @@ def main():
             "group": group_num,
             "type": "text" if is_text_card else "artwork",
         }
+
+        ov = ARTWORK_OVERRIDES.get(slug) if not is_text_card else None
+        if ov:
+            entry["title"] = ov.get("title", entry["title"])
+            if ov.get("caption"):
+                entry["caption"] = ov["caption"]
 
         if is_text_card and caption_lines:
             # Carton lu avec succès par l'OCR : affiché en légende HTML,

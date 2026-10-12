@@ -88,6 +88,9 @@
         wrap.className = isArtwork ? "work-artworks" : "work-texts";
         wrap.appendChild(card);
         section.appendChild(wrap);
+        if (isArtwork && item.caption) {
+          section.appendChild(buildCaptionBlock(item));
+        }
       });
 
       frag.appendChild(section);
