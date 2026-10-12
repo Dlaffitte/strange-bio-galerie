@@ -160,24 +160,72 @@ def make_watermark_layer(size, text=WATERMARK_TEXT, color=(255, 255, 255)):
     return tile
 
 
-def blacken_border(img: Image.Image, band: int = 110, light: int = 190) -> Image.Image:
-    """Remplace la marge claire (blanche/crème) qui touche le bord de l'image
-    par du noir. Seules les zones claires reliées au bord, dans une bande
-    de `band` pixels, sont modifiées."""
+def blacken_border(img: Image.Image, diff: int = 45, frac: float = 0.6) -> Image.Image:
+    """Repère le rectangle de l'œuvre (là où le contenu s'écarte de la couleur
+    du papier de la marge) et peint en noir uniquement ce qui est en dehors."""
     w, h = img.size
-    r, g, b = img.split()
-    low = ImageChops.darker(ImageChops.darker(r, g), b)
-    mask = low.point(lambda v: 255 if v >= light else 0)
-    framed = Image.new("L", (w + 2, h + 2), 255)
-    framed.paste(mask, (1, 1))
-    ImageDraw.floodfill(framed, (0, 0), 128)
-    region = framed.crop((1, 1, w + 1, h + 1)).point(lambda v: 255 if v == 128 else 0)
-    inner = Image.new("L", (w, h), 0)
-    inner.paste(255, (band, band, w - band, h - band))
-    region = ImageChops.subtract(region, inner)
-    region = region.filter(ImageFilter.MaxFilter(7))
+    px = img.load()
+    strip = 4
+
+    def paper(samples):
+        samples = sorted(samples)
+        return samples[len(samples) // 2]
+
+    def med(points):
+        return tuple(paper([px[p][c] for p in points]) for c in range(3))
+
+    def far(p, ref):
+        return max(abs(p[0] - ref[0]), abs(p[1] - ref[1]), abs(p[2] - ref[2])) > diff
+
+    y0, y1 = int(h * 0.1), int(h * 0.9)
+    x0, x1 = int(w * 0.1), int(w * 0.9)
+    ys = range(y0, y1, 3)
+    xs = range(x0, x1, 3)
+
+    def first_run(order, fractions):
+        # Il faut 4 colonnes/lignes consécutives de contenu : ignore l'ombre
+        # ou le trait sombre à l'extrême bord du scan.
+        order = list(order)
+        for i in range(len(order)):
+            if all(f >= frac for f in fractions[i:i + 4]) and len(fractions[i:i + 4]) == 4:
+                return order[i]
+        return None
+
+    def scan_cols(order, ref):
+        fr = [sum(1 for y in ys if far(px[x, y], ref)) / len(ys) for x in order]
+        return first_run(order, fr)
+
+    def scan_rows(order, ref):
+        fr = [sum(1 for x in xs if far(px[x, y], ref)) / len(xs) for y in order]
+        return first_run(order, fr)
+
+    # Référence prise légèrement en retrait pour ignorer l'ombre du bord de scan.
+    o = max(6, int(min(w, h) * 0.008))
+    ref_l = med([(o + x, y) for x in range(strip) for y in ys])
+    ref_r = med([(w - 1 - o - x, y) for x in range(strip) for y in ys])
+    ref_t = med([(x, o + y) for y in range(strip) for x in xs])
+    ref_b = med([(x, h - 1 - o - y) for y in range(strip) for x in xs])
+
+    # La marge ne dépasse jamais ~14 % : au-delà, on est dans l'œuvre
+    # (ex. dessin sur fond blanc) et on ne touche à rien.
+    mx, my = int(w * 0.14), int(h * 0.14)
+    left = scan_cols(range(0, mx), ref_l) or 0
+    right = scan_cols(range(w - 1, w - 1 - mx, -1), ref_r)
+    top = scan_rows(range(0, my), ref_t) or 0
+    bottom = scan_rows(range(h - 1, h - 1 - my, -1), ref_b)
+    right = w - 1 if right is None else right
+    bottom = h - 1 if bottom is None else bottom
+
     out = img.copy()
-    out.paste((0, 0, 0), mask=region)
+    d = ImageDraw.Draw(out)
+    if left > 0:
+        d.rectangle((0, 0, left - 1, h), fill=(0, 0, 0))
+    if right < w - 1:
+        d.rectangle((right + 1, 0, w, h), fill=(0, 0, 0))
+    if top > 0:
+        d.rectangle((0, 0, w, top - 1), fill=(0, 0, 0))
+    if bottom < h - 1:
+        d.rectangle((0, bottom + 1, w, h), fill=(0, 0, 0))
     return out
 
 
