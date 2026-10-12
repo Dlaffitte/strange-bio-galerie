@@ -225,36 +225,28 @@ html, body {
   opacity: 0.5;
 }
 
-/* Légende sous l'image : petite police de légende, sobre */
+/* Légende sous l'image : texte centré, police unique */
 .caption-block {
   width: 100%;
   max-width: 640px;
-  text-align: left;
-  padding: 0 4px;
-  border-left: 2px solid var(--accent);
-  padding-left: 14px;
-  margin-top: -4px;
+  text-align: center;
+  margin: -4px auto 0;
 }
 
-.caption-kicker {
-  font-size: 0.82rem;
-  font-weight: 600;
-  line-height: 1.45;
-  color: var(--text-main);
-  margin: 0 0 4px;
+.caption-kicker,
+.caption-body p {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 
 .caption-body {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-}
-
-.caption-body p {
-  margin: 0;
-  font-size: 0.78rem;
-  line-height: 1.5;
-  color: var(--text-muted);
+  gap: 4px;
+  margin-top: 4px;
 }
 
 /* Cartons de texte : rendus comme un feuillet clair, plus petit, au-dessus */
