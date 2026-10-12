@@ -21,7 +21,7 @@ import re
 import unicodedata
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 try:
     import pytesseract  # OCR : extrait le texte des cartons pour l'afficher en légende HTML
@@ -160,6 +160,27 @@ def make_watermark_layer(size, text=WATERMARK_TEXT, color=(255, 255, 255)):
     return tile
 
 
+def blacken_border(img: Image.Image, band: int = 110, light: int = 190) -> Image.Image:
+    """Remplace la marge claire (blanche/crème) qui touche le bord de l'image
+    par du noir. Seules les zones claires reliées au bord, dans une bande
+    de `band` pixels, sont modifiées."""
+    w, h = img.size
+    r, g, b = img.split()
+    low = ImageChops.darker(ImageChops.darker(r, g), b)
+    mask = low.point(lambda v: 255 if v >= light else 0)
+    framed = Image.new("L", (w + 2, h + 2), 255)
+    framed.paste(mask, (1, 1))
+    ImageDraw.floodfill(framed, (0, 0), 128)
+    region = framed.crop((1, 1, w + 1, h + 1)).point(lambda v: 255 if v == 128 else 0)
+    inner = Image.new("L", (w, h), 0)
+    inner.paste(255, (band, band, w - band, h - band))
+    region = ImageChops.subtract(region, inner)
+    region = region.filter(ImageFilter.MaxFilter(7))
+    out = img.copy()
+    out.paste((0, 0, 0), mask=region)
+    return out
+
+
 def process_image(src_path: Path, out_path: Path, max_dim: int, watermark: bool):
     img = Image.open(src_path)
     img = ImageOps.exif_transpose(img)
@@ -169,8 +190,10 @@ def process_image(src_path: Path, out_path: Path, max_dim: int, watermark: bool)
     if scale < 1.0:
         img = img.resize((max(1, int(w * scale)), max(1, int(h * scale))), Image.LANCZOS)
 
+    dominant = get_dominant_color(img) if watermark else None
+    img = blacken_border(img)
+
     if watermark:
-        dominant = get_dominant_color(img)
         wm_color = watermark_color_from_dominant(dominant)
 
         rgba = img.convert("RGBA")
