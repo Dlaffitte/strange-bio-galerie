@@ -641,3 +641,9 @@ html, body {
 
 .site-footer p { margin: 0 0 16px; }
 .site-footer-prices { color: var(--text-main); font-weight: 600; }
+
+.site-offer {
+  margin: -8px auto 0;
+  padding: 0 20px 24px;
+  border-top: none;
+}
