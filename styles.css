@@ -624,3 +624,20 @@ html, body {
 .work-index--single { white-space: pre-line; line-height: 1.5; }
 .caption-kicker, .caption-body p { white-space: pre-line; }
 .notice-author { display: block; font-size: 1rem; margin-bottom: 4px; }
+
+/* Pied de page : tirages */
+.site-footer {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+  text-align: center;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.site-footer p { margin: 0 0 16px; }
+.site-footer-prices { color: var(--text-main); font-weight: 600; }
