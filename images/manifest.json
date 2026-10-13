@@ -246,17 +246,17 @@
     "items": [
       {
         "id": "legende-10",
-        "title": "Les super Héros de Bonbobiomix combattent la Malbouffe",
+        "title": "Les super Héros de Bonbobiomix\ncombattent\nLa Malbouffe",
         "order": 19,
         "group": 10,
         "type": "text",
         "caption": [
-          "Les super Héros de Bonbobiomix combattent la Malbouffe"
+          "Les super Héros de Bonbobiomix\ncombattent\nLa Malbouffe"
         ]
       },
       {
         "id": "strange-bio-vegan-battle",
-        "title": "Strange Bio Vegan Battle",
+        "title": "Strange Bio\nVegan Battle",
         "order": 20,
         "group": 10,
         "type": "artwork",
@@ -308,7 +308,7 @@
       },
       {
         "id": "strange-bio",
-        "title": "Strange Bio",
+        "title": "Les Potes Âgé.es Solidaires !",
         "order": 24,
         "group": 12,
         "type": "artwork",
@@ -334,7 +334,7 @@
       },
       {
         "id": "marcel-bobobio-fils",
-        "title": "Marcel Bobobio&Fils",
+        "title": "Marcel Bonbobiot",
         "order": 26,
         "group": 13,
         "type": "artwork",
@@ -354,7 +354,7 @@
         "type": "text",
         "caption": [
           "En Lutte sur la Butte !",
-          "Contre les violences faites aux fleurs. Le mouvement Me Touffe, Green Leaves Matter, No Nature !, Les Pétales gueulent ...",
+          "Contre les violences faites aux fleurs.\nLe mouvement Me Touffe, Green Leaves Matter,\nNoNature !, Les Pétales Gueulent ...",
           "C'est le bouquet final !"
         ]
       },
@@ -374,7 +374,7 @@
     "items": [
       {
         "id": "plan-b",
-        "title": "L'Ultime Testament et les Grands Récits Biobliques",
+        "title": "L'Ultime Testament\net les Grands Récits\nBiobliques.",
         "order": 30,
         "group": 15,
         "type": "artwork",
@@ -437,7 +437,7 @@
         "caption": [
           "Vie Culturelle et plein air.",
           "Un effort particulier est demandé au spectacle sur sol vivant.",
-          "Nos efforts ne sauraient être intermittents ! La compagnie de théâtre Bonbobiorick revisite Shakespeare. Après le succès de Biothello, Hamlet Végan."
+          "Nos efforts ne sauraient être intermittents !\nLa compagnie de théâtre Bonbobiorick revisite Shakespeare.\nAprès le succès de Biothello, Hamlet Végan."
         ]
       },
       {
@@ -511,7 +511,7 @@
         "type": "text",
         "caption": [
           "Paint It Green !",
-          "Pour la biodiversité dans l'industrie musicale, Le Label Des Champs œuvre pour l'assainissement de l'air de variété et la valorisation de la musique verte. Le Punk Recyclable, Le Rock Cabbage, Le Veggie Métal, Le Gluten-Free-Jazz."
+          "Pour la biodiversité dans l'industrie musicale, Le Label Des Champs œuvre pour l'assainissement de l'air de variété et la valorisation de la musique verte. Le Punk Recyclable, Le Rock Cabbage, Le Weggie Métal, Le Gluten-Free-Jazz."
         ]
       },
       {

@@ -618,3 +618,9 @@ html, body {
   }
 }
 
+
+/* Retours à la ligne explicites dans titres et légendes */
+.work-index { white-space: pre-line; text-align: center; }
+.work-index--single { white-space: nowrap; font-size: clamp(0.5rem, 2.6vw, 0.72rem); letter-spacing: 0.1em; }
+.caption-kicker, .caption-body p { white-space: pre-line; }
+.notice-author { display: block; font-size: 1rem; margin-bottom: 4px; }

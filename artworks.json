@@ -1,6 +1,6 @@
 {
   "plan-b": {
-    "title": "L'Ultime Testament et les Grands Récits Biobliques",
+    "title": "L'Ultime Testament\net les Grands Récits\nBiobliques.",
     "caption": [
       "Ici, La Recréation de l'Univers, d'après Les évangiles selon Sainte Ethique"
     ]
@@ -28,5 +28,14 @@
   },
   "bonbobio": {
     "hide_title": true
+  },
+  "strange-bio-vegan-battle": {
+    "title": "Strange Bio\nVegan Battle"
+  },
+  "strange-bio": {
+    "title": "Les Potes Âgé.es Solidaires !"
+  },
+  "marcel-bobobio-fils": {
+    "title": "Marcel Bonbobiot"
   }
 }
