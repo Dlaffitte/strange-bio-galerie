@@ -42,7 +42,7 @@
       var groupArtworks = group.items.filter(function (i) { return i.type === "artwork"; });
       indexLabel.textContent = groupArtworks.length
         ? groupArtworks.filter(function (i) { return !i.hide_title; }).map(function (i) { return i.title; }).join(" · ")
-        : "Le communiqué du Ministère du Plant";
+        : "Le communiqué\n\nDu\n\nMINISTÈRE du PLANT";
       if (!groupArtworks.length) indexLabel.classList.add("work-index--single");
       if (indexLabel.textContent) section.appendChild(indexLabel);
 
