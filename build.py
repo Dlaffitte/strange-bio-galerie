@@ -323,6 +323,8 @@ def main():
         """Ordre naturel du diaporama : groupe numérique (1, 2, 3…, pas
         alphabétique) puis sous-rang (le carton de texte "N.1" avant les
         œuvres "N.2"/"N.3", les fichiers "N.jpg" sans suffixe en dernier)."""
+        if path.stem.startswith("Image_Titre"):
+            return (-1, 0, path.name)
         m = re.match(r"^(\d+)(?:\.(\d+))?", path.stem)
         group_num = int(m.group(1)) if m else 999
         subnum = int(m.group(2)) if (m and m.group(2)) else 100
@@ -334,7 +336,10 @@ def main():
         stem = f.stem
         m = re.match(r"^(\d+)", stem)
         group_num = int(m.group(1)) if m else 999
-        is_text_card = f.stat().st_size < SIZE_THRESHOLD
+        is_cover = stem.startswith("Image_Titre")
+        if is_cover:
+            group_num = -1
+        is_text_card = f.stat().st_size < SIZE_THRESHOLD and not is_cover
 
         # Légendes fournies par l'artiste (captions.json) : elles remplacent
         # tous les cartons de texte du groupe (OCR ou image).
@@ -376,6 +381,11 @@ def main():
             "group": group_num,
             "type": "text" if is_text_card else "artwork",
         }
+
+        if is_cover:
+            entry["title"] = "Bonbobio — Dexter Kramex"
+            entry["cover"] = True
+            entry["hide_title"] = True
 
         ov = ARTWORK_OVERRIDES.get(slug) if not is_text_card else None
         if ov:

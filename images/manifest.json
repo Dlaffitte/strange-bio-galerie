@@ -1,11 +1,27 @@
 [
   {
+    "group": -1,
+    "items": [
+      {
+        "id": "image-titre",
+        "title": "Bonbobio — Dexter Kramex",
+        "order": 0,
+        "group": -1,
+        "type": "artwork",
+        "cover": true,
+        "hide_title": true,
+        "thumb": "images/thumbs/image-titre.jpg",
+        "full": "images/full/image-titre.jpg"
+      }
+    ]
+  },
+  {
     "group": 0,
     "items": [
       {
         "id": "bonbobio",
         "title": "Bonbobio",
-        "order": 0,
+        "order": 1,
         "group": 0,
         "type": "artwork",
         "hide_title": true,
@@ -20,7 +36,7 @@
       {
         "id": "legende-1",
         "title": "BONBOBIO, c'est le slogan de campagne du Ministère du Plant, dont l'action entend remédier à court terme à la crise climatique par l'application stricte de chaque mesure de son programme. Afin de répondre aux objectifs de la transition écologique, le Ministère du Plant soutient le changement vert et accompagne les initiatives de valorisation de la filière Bio se dirigeant résolument vers une écologie industrielle intensive, à grande échelle, compétitive, responsable et compatible avec les intérêts de l'écologie de marché.",
-        "order": 1,
+        "order": 2,
         "group": 1,
         "type": "text",
         "caption": [
@@ -41,7 +57,7 @@
       {
         "id": "legende-2",
         "title": "Avec Bonbobiol,",
-        "order": 2,
+        "order": 3,
         "group": 2,
         "type": "text",
         "caption": [
@@ -53,7 +69,7 @@
       {
         "id": "bonbobiol",
         "title": "Bonbobiol",
-        "order": 3,
+        "order": 4,
         "group": 2,
         "type": "artwork",
         "thumb": "images/thumbs/bonbobiol.jpg",
@@ -67,7 +83,7 @@
       {
         "id": "legende-3",
         "title": "L'Atome de chèvre.",
-        "order": 4,
+        "order": 5,
         "group": 3,
         "type": "text",
         "caption": [
@@ -78,7 +94,7 @@
       {
         "id": "bonbobiohazard-1",
         "title": "Bonbobiohazard",
-        "order": 5,
+        "order": 6,
         "group": 3,
         "type": "artwork",
         "thumb": "images/thumbs/bonbobiohazard-1.jpg",
@@ -92,7 +108,7 @@
       {
         "id": "legende-4",
         "title": "La bombe au Bio.",
-        "order": 6,
+        "order": 7,
         "group": 4,
         "type": "text",
         "caption": [
@@ -104,7 +120,7 @@
       {
         "id": "bonbobiom",
         "title": "Bonbobiom",
-        "order": 7,
+        "order": 8,
         "group": 4,
         "type": "artwork",
         "thumb": "images/thumbs/bonbobiom.jpg",
@@ -118,7 +134,7 @@
       {
         "id": "legende-5",
         "title": "La compagnie aérienne dépolluante.",
-        "order": 8,
+        "order": 9,
         "group": 5,
         "type": "text",
         "caption": [
@@ -129,7 +145,7 @@
       {
         "id": "air-frais",
         "title": "Air Frais",
-        "order": 9,
+        "order": 10,
         "group": 5,
         "type": "artwork",
         "thumb": "images/thumbs/air-frais.jpg",
@@ -143,7 +159,7 @@
       {
         "id": "legende-6",
         "title": "Le Ministère du Plant soutient la production agricole.",
-        "order": 10,
+        "order": 11,
         "group": 6,
         "type": "text",
         "caption": [
@@ -155,7 +171,7 @@
       {
         "id": "karachobio",
         "title": "Karachobio",
-        "order": 11,
+        "order": 12,
         "group": 6,
         "type": "artwork",
         "thumb": "images/thumbs/karachobio.jpg",
@@ -169,7 +185,7 @@
       {
         "id": "legende-7",
         "title": "Bonbobiomasse",
-        "order": 13,
+        "order": 14,
         "group": 7,
         "type": "text",
         "caption": [
@@ -181,7 +197,7 @@
       {
         "id": "l-usine-verte",
         "title": "L'usine Verte",
-        "order": 14,
+        "order": 15,
         "group": 7,
         "type": "artwork",
         "thumb": "images/thumbs/l-usine-verte.jpg",
@@ -195,7 +211,7 @@
       {
         "id": "legende-8",
         "title": "Bo'nbo biyo",
-        "order": 15,
+        "order": 16,
         "group": 8,
         "type": "text",
         "caption": [
@@ -207,7 +223,7 @@
       {
         "id": "bo-nbobiyo",
         "title": "Bo'nbobiyo",
-        "order": 16,
+        "order": 17,
         "group": 8,
         "type": "artwork",
         "thumb": "images/thumbs/bo-nbobiyo.jpg",
@@ -221,7 +237,7 @@
       {
         "id": "legende-9",
         "title": "Lebon & Bobillot, Négociants",
-        "order": 17,
+        "order": 18,
         "group": 9,
         "type": "text",
         "caption": [
@@ -233,7 +249,7 @@
       {
         "id": "lebon-bobillot",
         "title": "Lebon&Bobillot",
-        "order": 18,
+        "order": 19,
         "group": 9,
         "type": "artwork",
         "thumb": "images/thumbs/lebon-bobillot.jpg",
@@ -247,7 +263,7 @@
       {
         "id": "legende-10",
         "title": "Les super Héros de Bonbobiomix\ncombattent\nLa Malbouffe",
-        "order": 19,
+        "order": 20,
         "group": 10,
         "type": "text",
         "caption": [
@@ -257,7 +273,7 @@
       {
         "id": "strange-bio-vegan-battle",
         "title": "Strange Bio\nVegan Battle",
-        "order": 20,
+        "order": 21,
         "group": 10,
         "type": "artwork",
         "thumb": "images/thumbs/strange-bio-vegan-battle.jpg",
@@ -271,7 +287,7 @@
       {
         "id": "legende-11",
         "title": "BonbobiO. G. M.",
-        "order": 21,
+        "order": 22,
         "group": 11,
         "type": "text",
         "caption": [
@@ -283,7 +299,7 @@
       {
         "id": "schtrulk",
         "title": "Schtrulk",
-        "order": 22,
+        "order": 23,
         "group": 11,
         "type": "artwork",
         "thumb": "images/thumbs/schtrulk.jpg",
@@ -297,7 +313,7 @@
       {
         "id": "legende-12",
         "title": "Pas de retraite dans la bataille pour la biodiversité !",
-        "order": 23,
+        "order": 24,
         "group": 12,
         "type": "text",
         "caption": [
@@ -310,7 +326,7 @@
       {
         "id": "strange-bio",
         "title": "Spécial Strange Bio",
-        "order": 24,
+        "order": 25,
         "group": 12,
         "type": "artwork",
         "thumb": "images/thumbs/strange-bio.jpg",
@@ -324,7 +340,7 @@
       {
         "id": "legende-13",
         "title": "Fin de vie et retour à la terre bio.",
-        "order": 25,
+        "order": 26,
         "group": 13,
         "type": "text",
         "caption": [
@@ -336,7 +352,7 @@
       {
         "id": "marcel-bobobio-fils",
         "title": "Retour à la Terre",
-        "order": 26,
+        "order": 27,
         "group": 13,
         "type": "artwork",
         "thumb": "images/thumbs/marcel-bobobio-fils.jpg",
@@ -350,7 +366,7 @@
       {
         "id": "legende-14",
         "title": "En Lutte sur la Butte !",
-        "order": 27,
+        "order": 28,
         "group": 14,
         "type": "text",
         "caption": [
@@ -362,7 +378,7 @@
       {
         "id": "metoof-2",
         "title": "Contre... fleurs",
-        "order": 28,
+        "order": 29,
         "group": 14,
         "type": "artwork",
         "thumb": "images/thumbs/metoof-2.jpg",
@@ -376,7 +392,7 @@
       {
         "id": "plan-b",
         "title": "L'Ultime Testament\net les Grands Récits\nBiobliques.",
-        "order": 30,
+        "order": 31,
         "group": 15,
         "type": "artwork",
         "caption": [
@@ -388,7 +404,7 @@
       {
         "id": "petanque",
         "title": "Petanque",
-        "order": 31,
+        "order": 32,
         "group": 15,
         "type": "artwork",
         "hide_title": true,
@@ -406,7 +422,7 @@
       {
         "id": "legende-16",
         "title": "Grande Littérature.",
-        "order": 32,
+        "order": 33,
         "group": 16,
         "type": "text",
         "caption": [
@@ -418,7 +434,7 @@
       {
         "id": "captain-green",
         "title": "Captain Green",
-        "order": 33,
+        "order": 34,
         "group": 16,
         "type": "artwork",
         "thumb": "images/thumbs/captain-green.jpg",
@@ -432,7 +448,7 @@
       {
         "id": "legende-17",
         "title": "Vie Culturelle et plein air.",
-        "order": 34,
+        "order": 35,
         "group": 17,
         "type": "text",
         "caption": [
@@ -444,7 +460,7 @@
       {
         "id": "hamlet-vegan-2",
         "title": "To be or not to bio",
-        "order": 35,
+        "order": 36,
         "group": 17,
         "type": "artwork",
         "thumb": "images/thumbs/hamlet-vegan-2.jpg",
@@ -458,7 +474,7 @@
       {
         "id": "legende-18",
         "title": "Littérature enfantine,",
-        "order": 36,
+        "order": 37,
         "group": 18,
         "type": "text",
         "caption": [
@@ -469,7 +485,7 @@
       {
         "id": "le-petit-chaperon-bio-2",
         "title": "Le Petit Chaperon Bio",
-        "order": 37,
+        "order": 38,
         "group": 18,
         "type": "artwork",
         "thumb": "images/thumbs/le-petit-chaperon-bio-2.jpg",
@@ -483,7 +499,7 @@
       {
         "id": "legende-19",
         "title": "Les Parutions Jeunesse et la presse jeune public auront pour mission de favoriser la compréhension des enjeux et problématiques de notre temps,\nà travers une approche ludique et joyeuse compréhensible par les nouvelles générations.",
-        "order": 38,
+        "order": 39,
         "group": 19,
         "type": "text",
         "caption": [
@@ -493,7 +509,7 @@
       {
         "id": "bonbobiof",
         "title": "Bonbobiof",
-        "order": 39,
+        "order": 40,
         "group": 19,
         "type": "artwork",
         "thumb": "images/thumbs/bonbobiof.jpg",
@@ -507,7 +523,7 @@
       {
         "id": "legende-20",
         "title": "Paint It Green !",
-        "order": 41,
+        "order": 42,
         "group": 20,
         "type": "text",
         "caption": [
@@ -518,7 +534,7 @@
       {
         "id": "bonbobiones",
         "title": "weggieMetal",
-        "order": 42,
+        "order": 43,
         "group": 20,
         "type": "artwork",
         "thumb": "images/thumbs/bonbobiones.jpg",
@@ -532,7 +548,7 @@
       {
         "id": "legende-21",
         "title": "Le Cinéma du GIEC",
-        "order": 43,
+        "order": 44,
         "group": 21,
         "type": "text",
         "caption": [
@@ -544,7 +560,7 @@
       {
         "id": "gueule-de-bois",
         "title": "Gueule De Bois",
-        "order": 44,
+        "order": 45,
         "group": 21,
         "type": "artwork",
         "thumb": "images/thumbs/gueule-de-bois.jpg",
@@ -558,7 +574,7 @@
       {
         "id": "legende-22",
         "title": "Une fable urbaine.",
-        "order": 45,
+        "order": 46,
         "group": 22,
         "type": "text",
         "caption": [
@@ -569,7 +585,7 @@
       {
         "id": "envie-de-germer",
         "title": "Envie De Germer",
-        "order": 46,
+        "order": 47,
         "group": 22,
         "type": "artwork",
         "thumb": "images/thumbs/envie-de-germer.jpg",
@@ -583,7 +599,7 @@
       {
         "id": "legende-23",
         "title": "Nouveau carton au biox office :",
-        "order": 47,
+        "order": 48,
         "group": 23,
         "type": "text",
         "caption": [
@@ -597,7 +613,7 @@
       {
         "id": "rambio",
         "title": "Rambio",
-        "order": 48,
+        "order": 49,
         "group": 23,
         "type": "artwork",
         "thumb": "images/thumbs/rambio.jpg",
@@ -611,7 +627,7 @@
       {
         "id": "legende-24",
         "title": "Programme spatial écoresponsable",
-        "order": 49,
+        "order": 50,
         "group": 24,
         "type": "text",
         "caption": [
@@ -622,7 +638,7 @@
       {
         "id": "les-champs-de-mars-2",
         "title": "Les Champs De Mars",
-        "order": 50,
+        "order": 51,
         "group": 24,
         "type": "artwork",
         "thumb": "images/thumbs/les-champs-de-mars-2.jpg",
@@ -636,7 +652,7 @@
       {
         "id": "legende-25",
         "title": "Le sponsor des collapsologues de l'extrême.",
-        "order": 51,
+        "order": 52,
         "group": 25,
         "type": "text",
         "caption": [
@@ -647,7 +663,7 @@
       {
         "id": "bonbobiover",
         "title": "Bonbobiover",
-        "order": 52,
+        "order": 53,
         "group": 25,
         "type": "artwork",
         "thumb": "images/thumbs/bonbobiover.jpg",

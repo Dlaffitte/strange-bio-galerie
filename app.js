@@ -74,7 +74,7 @@
         img.draggable = false;
 
         card.appendChild(img);
-        if (isArtwork) {
+        if (isArtwork && !item.cover) {
           artworkNumber += 1;
           var badge = document.createElement("span");
           badge.className = "artwork-number";
