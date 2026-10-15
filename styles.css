@@ -180,7 +180,7 @@ html, body {
   z-index: 2;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 12px clamp(16px, 4vw, 48px) 8px;
+  padding: 0 clamp(16px, 4vw, 48px) 8px;
 }
 
 /* Flux vertical "story" : chaque pièce = un bloc texte + illustration(s) */
@@ -628,7 +628,7 @@ html, body {
 .site-offer {
   max-width: 640px;
   margin: 8px auto 0;
-  padding: 0 20px 24px;
+  padding: 0 20px 0;
   text-align: center;
   color: var(--text-muted);
   font-size: 0.9rem;
@@ -636,6 +636,7 @@ html, body {
 }
 
 .site-offer p { margin: 0 0 16px; }
+.site-offer:not(.site-offer--end) p:last-child { margin-bottom: 0; }
 .site-offer-prices { color: var(--text-main); font-weight: 600; }
 
 /* Titre et coordonnées de l'artiste */
