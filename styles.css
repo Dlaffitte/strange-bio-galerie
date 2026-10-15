@@ -180,7 +180,7 @@ html, body {
   z-index: 2;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 12px clamp(16px, 4vw, 48px) 80px;
+  padding: 12px clamp(16px, 4vw, 48px) 8px;
 }
 
 /* Flux vertical "story" : chaque pièce = un bloc texte + illustration(s) */
@@ -659,4 +659,4 @@ html, body {
 }
 .site-offer--end { margin: 40px auto 0; padding-bottom: 32px; }
 
-.notice-card--end { position: relative; z-index: 2; margin: 24px auto 40px; width: calc(100% - 32px); }
+.notice-card--end { position: relative; z-index: 2; margin: 0 auto 40px; width: calc(100% - 32px); }
