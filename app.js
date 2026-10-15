@@ -376,7 +376,7 @@
   });
 
   // Chargement des données (groupes texte + illustration)
-  fetch("images/manifest.json")
+  fetch("images/manifest.json?v=" + Date.now(), { cache: "no-store" })
     .then(function (res) { return res.json(); })
     .then(function (data) {
       groups = data;
