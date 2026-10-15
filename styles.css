@@ -658,3 +658,5 @@ html, body {
   user-select: text;
 }
 .site-offer--end { margin: 40px auto 0; padding-bottom: 32px; }
+
+.notice-card--end { position: relative; z-index: 2; margin: 24px auto 40px; width: calc(100% - 32px); }
