@@ -248,7 +248,7 @@ html, body {
 
 .caption-block .caption-tagline {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.05rem;
+  font-size: 0.85rem;
   font-weight: 700;
   font-style: italic;
   letter-spacing: 0.12em;
@@ -621,9 +621,8 @@ html, body {
 
 /* Retours à la ligne explicites dans titres et légendes */
 .work-index { white-space: pre-line; text-align: center; }
-.work-index--single { white-space: pre-line; line-height: 1.5; }
+.work-index--single { white-space: pre-line; line-height: 1.05; }
 .caption-kicker, .caption-body p { white-space: pre-line; }
-.notice-author { display: block; font-size: 1rem; margin-bottom: 4px; }
 
 /* Message tirages d'art (sous l'encart) */
 .site-offer {
@@ -638,3 +637,24 @@ html, body {
 
 .site-offer p { margin: 0 0 16px; }
 .site-offer-prices { color: var(--text-main); font-weight: 600; }
+
+/* Titre et coordonnées de l'artiste */
+.header-tag { margin-top: 0; margin-bottom: 12px; }
+.site-title { margin-bottom: 14px; }
+.artist-contact {
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+.artist-name { color: var(--text-main); font-weight: 600; }
+.artist-contact a {
+  color: var(--accent-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.site-offer--end { margin: 40px auto 0; padding-bottom: 32px; }

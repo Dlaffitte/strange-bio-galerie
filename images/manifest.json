@@ -303,12 +303,13 @@
         "caption": [
           "Pas de retraite dans la bataille pour la biodiversité !",
           "Le Ministère du Plant décrète la mobilisation générale des pensionnaires d'EPHAD pour la revégétalisation du cadre de vie.",
-          "Recyclage, Valorisation, Expertise. Le 3ème âge est toujours vert et ses pouvoirs sont immenses. Ici, Rose, Hortense et Marguerite, gagnantes du concours Rusticall Of Duty, devant leur réalisation à l'EPHAD de Biobigny."
+          "Recyclage, Valorisation, Expertise. Le 3ème âge est toujours vert et ses pouvoirs sont immenses. Ici, Rose, Hortense et Marguerite, gagnantes du concours Rusticall Of Duty, devant leur réalisation à l'EPHAD de Biobigny.",
+          "Les potes-âgées solidaires"
         ]
       },
       {
         "id": "strange-bio",
-        "title": "Les Potes Âgé.es Solidaires !",
+        "title": "Spécial Strange Bio",
         "order": 24,
         "group": 12,
         "type": "artwork",
@@ -334,7 +335,7 @@
       },
       {
         "id": "marcel-bobobio-fils",
-        "title": "Marcel Bonbobiot",
+        "title": "Retour à la Terre",
         "order": 26,
         "group": 13,
         "type": "artwork",
@@ -348,12 +349,14 @@
     "items": [
       {
         "id": "legende-14",
-        "title": "Le\n\nNoNature!\n\nLes Pétales Gueulent",
+        "title": "En Lutte sur la Butte !",
         "order": 27,
         "group": 14,
         "type": "text",
         "caption": [
-          "Le\n\nNoNature!\n\nLes Pétales Gueulent"
+          "En Lutte sur la Butte !",
+          "Contre les violences faites aux fleurs.\nLe mouvement Me Touffe, Green Leaves Matter,\nNoNature !, Les Pétales Gueulent ...",
+          "C'est le bouquet final !"
         ]
       },
       {
@@ -434,13 +437,13 @@
         "type": "text",
         "caption": [
           "Vie Culturelle et plein air.",
-          "Un effort particulier est demandé au spectacle sur sol vivant.",
+          "Un effort particulier est demandé au spectacle\nsur sol vivant.",
           "Nos efforts ne sauraient être intermittents !\nLa compagnie de théâtre Bonbobiorick revisite Shakespeare.\nAprès le succès de Biothello, Hamlet Végan."
         ]
       },
       {
         "id": "hamlet-vegan-2",
-        "title": "Hamlet Vegan",
+        "title": "To be or not to bio",
         "order": 35,
         "group": 17,
         "type": "artwork",
@@ -460,7 +463,7 @@
         "type": "text",
         "caption": [
           "Littérature enfantine,",
-          "Adaptation des contes anciens et légendes traditionnelles pour familiariser les plus jeunes à leur nouvel environnement."
+          "Adaptation des contes anciens et légendes traditionnelles\npour familiariser les jeunes\nà leur nouvel environnement."
         ]
       },
       {
@@ -479,12 +482,12 @@
     "items": [
       {
         "id": "legende-19",
-        "title": "Les Parutions Jeunesse et la presse jeune public auront pour mission de favoriser la compréhension des enjeux et problématiques de notre temps, à travers une approche ludique et joyeuse compréhensible par les nouvelles générations.",
+        "title": "Les Parutions Jeunesse et la presse jeune public auront pour mission de favoriser la compréhension des enjeux et problématiques de notre temps,\nà travers une approche ludique et joyeuse compréhensible par les nouvelles générations.",
         "order": 38,
         "group": 19,
         "type": "text",
         "caption": [
-          "Les Parutions Jeunesse et la presse jeune public auront pour mission de favoriser la compréhension des enjeux et problématiques de notre temps, à travers une approche ludique et joyeuse compréhensible par les nouvelles générations."
+          "Les Parutions Jeunesse et la presse jeune public auront pour mission de favoriser la compréhension des enjeux et problématiques de notre temps,\nà travers une approche ludique et joyeuse compréhensible par les nouvelles générations."
         ]
       },
       {
@@ -509,7 +512,7 @@
         "type": "text",
         "caption": [
           "Paint It Green !",
-          "Pour la biodiversité dans l'industrie musicale, Le Label Des Champs œuvre pour l'assainissement de l'air de variété et la valorisation de la musique verte. Le Punk Recyclable, Le Rock Cabbage, Le Weggie Métal, Le Gluten-Free-Jazz."
+          "Pour la biodiversité dans l'industrie musicale,\nLe Label Des Champs œuvre pour l'assainissement de l'air de variété et la valorisation de la musique verte.\nLe Punk Recyclable, Le Rock Cabbage, Le Weggie Métal, Le Gluten-Free-Jazz."
         ]
       },
       {
